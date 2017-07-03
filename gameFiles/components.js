@@ -121,6 +121,110 @@ CLOCKWORKRT.components.register([
             }
         ]
     },
+
+
+    {
+        name: "Bloque",
+        events: [
+            {
+                name: "#setup", code: function (event) {
+                    for(var i=0; i < this.var.w; i++)
+                         for(var j=0; j < this.var.h; j++)
+                            var textura= this.engine.spawn(this.var.textura, "component", {$x:i*32+this.var.$x, $y:j*32+this.var.$y});
+                }
+            }
+        ]
+    },
+    {
+        name: "Suelo",
+        inherits: "Bloque",
+        collision: {
+            "Block": [
+                { "x": 0, "y": 0, "w": this.var.w, "h": this.var.h},
+            ]
+        }
+    },
+    {
+        name: "Lava",
+        inherits: "Bloque",
+        collision: {
+            "DamageBlock": [
+                { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h },
+            ]
+        }
+    },
+    {
+        name: "Enemigo",
+        events: [
+            {
+                name: "#setup", code: function (event) {
+                    this.var.friction = 0.03;
+                    this.var.vx = this.var.vy = 0;
+                    this.var.ax = this.var.ay = 0;
+                }
+            },
+            {
+                name: "#loop", code: function (event) {
+                    //funcion de movimiento con ida y vuelta
+                }
+            },
+            {
+                name: "#collide", code: function (event) {
+                    this.var.dir = -this.var.dir
+                }
+            }
+        ],
+        collision: {
+            "DamageBlock": [
+                { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h },
+            ]
+        }
+    },
+    {
+        name: "Disparo",
+        inherits: "Lava",
+        events: [
+            {
+                name: "#setup", code: function (event) {
+                    this.var.friction = 0.03;
+                    this.var.vx = this.var.vy = 0;
+                    this.var.ax = this.var.ay = 0;
+                }
+            },
+            {
+                name: "#loop", code: function (event) {
+                    //funcion de movimiento solo ida
+                }
+            },
+            {
+                name: "#collide", code: function (event) {
+                    var explode = this.engine.spawn("Explosion", "component", {$x:0, $y:0})
+                    this.destroy
+                }
+            }
+        ],
+        collision: {
+            "DamageBlock": [
+                { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h },
+            ]
+        }
+    },
+    {
+        name: "Textura1",
+        sprite: "Suelo1"
+    },
+    {
+        name: "Enemigo1",
+        inherits: "Enemigo",
+        sprite: "Enemigo1"
+    },
+    {
+        name: "Disparo1",
+        inherits: "Disparo",
+        sprite: "Disparo1"
+    },
+	
+
 ])
 
 /*CLOCKWORKRT.components.register([

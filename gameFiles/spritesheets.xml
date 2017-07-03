@@ -19,6 +19,51 @@
       <frame name="Idle" x="0" y="0" w="100" h="100" t="100"></frame>
     </frames>
   </spritesheet>
+
+  <spritesheet name="Textura1" src="images/Textura1.png">
+    <states>
+      <state name="T">
+        <layer name="T"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="T" x="0" y="0">
+        <frame name="T"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="T" x="0" y="0" w="100" h="32" t="32"></frame>
+    </frames>
+  </spritesheet>
+
+
+  <spritesheet name="EnemigoODisparo" src="images/enemigo1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+      <state name="E2">
+        <layer name="E2"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+      <layer name="E2" x="0" y="0">
+        <frame name="E2"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="0" y="0" w="32" h="16" t="100"></frame>
+      <frame name="E2" x="32" y="0" w="32" h="16" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+
+
+
+
 </spritesheets>
 
 <!--
