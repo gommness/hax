@@ -1,0 +1,23 @@
+{
+    // Use IntelliSense to learn about possible Node.js debug attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "clockwork",
+            "request": "launch",
+            "name": "Debug game",
+            "program": "${workspaceRoot}/manifest.json",
+            "levelEditorEnabled": false
+        },
+        {
+            "type": "clockwork",
+            "request": "launch",
+            "name": "Debug game remotely",
+            "program": "${workspaceRoot}/manifest.json",
+            "levelEditorEnabled": false,
+            "remoteMachine": "192.168.1.60"
+        }
+    ]
+}
