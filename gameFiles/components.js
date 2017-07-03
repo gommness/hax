@@ -14,14 +14,15 @@ CLOCKWORKRT.components.register([
                 name: "#setup", code: function(event){
                     this.var.keyboardRight = false;
                     this.var.keyboardLeft = false;
-                    this.var.keyboardUp = false;
+                    this.var.keyboardJump = false;
 
                     this.var.moveSpeed = 4; //velocidad a la que se moverá el jugador lateralmente
-                    this.var.jumpSpeed = 10; //velocidad con la que saltará el jugador
+                    this.var.jumpSpeed = 30; //velocidad con la que saltará el jugador
+                    this.var.vLimit = 40;
                     this.var.vSpeed = 0; //velocidad vertical
                     this.var.hSpeed = 0; //velocidad horizontal
                     this.var.gravity = 1; //velocidad de la gravedad que afecta al jugador
-                    this.var.jumpEnable = false;
+                    this.var.jumpEnable = true;
                 }
             },
             {
@@ -32,8 +33,22 @@ CLOCKWORKRT.components.register([
                         this.var.hSpeed = -this.var.moveSpeed;
                     else
                         this.var.hSpeed = 0;
+
+
+                    this.var.vSpeed += this.var.gravity;
+                    if(this.var.vSpeed >= this.var.vLimit)
+                        this.var.vSpeed = this.var.vLimit;
+                    if(this.var.keyboardJump == true){
+                        //TODO comprobar, para el salto normal, que haya colision con suelo debajo del jugador
+                        if(this.var.jumpEnable == true){
+                            this.var.vSpeed = -this.var.jumpSpeed;//doble salto
+                            this.var.keyboardJump = false;
+                        }
+                    }
                     this.var.$x += this.var.hSpeed;
                     this.var.$y += this.var.vSpeed;
+                    if(this.var.$y >= 700)
+                        this.var.$y = 0;
                     /*
                     TODO:
                         si no estoy de pie en un solido, vspeed += gravity
@@ -50,7 +65,7 @@ CLOCKWORKRT.components.register([
                             this.var.keyboardRight = this.var.keyboardLeft = false;
                         break;
                         case 1://vk_up
-                            //JUMP
+                            this.var.keyboardJump = true;
                         break;
                         case 2://vk_right
                             this.var.keyboardRight = true;
@@ -61,6 +76,41 @@ CLOCKWORKRT.components.register([
                             this.var.keyboardLeft = true;
                         break;
                     }
+                }
+            },
+            {
+                name: "vk_release", code: function(event){
+                    this.engine.debug.log("release" + event);
+                    switch(event){
+                        case 0://vk_neutral
+                            //this.var.keyboardRight = this.var.keyboardLeft = false;
+                        break;
+                        case 1://vk_up
+                            this.var.vSpeed = Math.max(this.var.vSpeed, -0.25*this.var.jumpSpeed);//para detener el salto de forma mas organica
+                        break;
+                        case 2://vk_right
+                            //this.var.keyboardRight = true;
+                        break;
+                        case 3://vk_down
+                        break;
+                        case 4://vk_left
+                            //this.var.keyboardLeft = true;
+                        break;
+                    }
+                }
+            },
+            {
+                name: "gamepadDown", code: function(event){
+                    this.engine.debug.log(event.name);
+                    if(event.name == "A")
+                        this.do.vk_press(vk_up);
+                }
+            },
+            {
+                name: "gamepadUp", code: function(event){
+                    this.engine.debug.log(event.name);
+                    if(event.name == "A")
+                        this.do.vk_release(vk_up);
                 }
             },
             {
@@ -82,7 +132,7 @@ CLOCKWORKRT.components.register([
                             this.do.vk_press(vk_left);
                             break;
                         case 38: //flecha arriba
-                            //TODO jump
+                            this.do.ck_press(vk_up);
                             break;
                         case 39: //flecha derecha
                             this.do.vk_press(vk_right);
@@ -104,8 +154,8 @@ CLOCKWORKRT.components.register([
                             this.do.vk_press(vk_neutral);
                             break;
                         case 38: //flecha arriba
-                            if(this.var.vSpeed < 0)
-                                this.var.vSpeed = Math.min(this.var.vSpeed, 2);//para detener el salto de forma mas organica
+                            //if(this.var.vSpeed < 0)
+                                this.do.vk_release(vk_up);
                             break;
                         case 39: //flecha derecha
                             this.do.vk_press(vk_neutral);
