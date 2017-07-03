@@ -1,4 +1,15 @@
 
+
+<?xml version="1.0" encoding="utf-8"?>
+<levels>
+  <level id="mainLevel">
+    <object name="keyboard" type="keyboard" x="0" y="0" ></object>
+    <object name="gamepad" type="gamepad" x="0" y="0" ></object>
+    <object name="player" type="player" x="100" y="100"></object>
+  </level>
+</levels>
+
+
 <!--
 <?xml version="1.0" encoding="utf-8"?>
 <levels>

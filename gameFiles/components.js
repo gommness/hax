@@ -1,16 +1,122 @@
+var vk_neutral = 0;
+var vk_up = 1;
+var vk_right = 2;
+var vk_down = 3;
+var vk_left = 4;
+
+
 CLOCKWORKRT.components.register([
     {
         name: "player",
+        sprite: "player",
         events: [
             {
                 name: "#setup", code: function(event){
-                    vspeed = 0;
-                    hspeed = 0;
+                    this.var.keyboardRight = false;
+                    this.var.keyboardLeft = false;
+                    this.var.keyboardUp = false;
+
+                    this.var.moveSpeed = 4; //velocidad a la que se moverá el jugador lateralmente
+                    this.var.jumpSpeed = 10; //velocidad con la que saltará el jugador
+                    this.var.vSpeed = 0; //velocidad vertical
+                    this.var.hSpeed = 0; //velocidad horizontal
+                    this.var.gravity = 1; //velocidad de la gravedad que afecta al jugador
+                    this.var.jumpEnable = false;
                 }
             },
             {
                 name: "#loop", code: function (event){
-
+                    if(this.var.keyboardRight && !this.var.keyboardLeft)//nos movemos a la derecha
+                        this.var.hSpeed = this.var.moveSpeed;
+                    else if(!this.var.keyboardRight && this.var.keyboardLeft)//nos movemos a la izquierda
+                        this.var.hSpeed = -this.var.moveSpeed;
+                    else
+                        this.var.hSpeed = 0;
+                    this.var.$x += this.var.hSpeed;
+                    this.var.$y += this.var.vSpeed;
+                    /*
+                    TODO:
+                        si no estoy de pie en un solido, vspeed += gravity
+                        si en x+hspeed o y+vspeed hay una colision con un solido
+                        me snappeo al grid mas cercano
+                    */
+                }
+            },
+            {
+                name: "vk_press", code: function(event){
+                    this.engine.debug.log(event);
+                    switch(event){
+                        case 0://vk_neutral
+                            this.var.keyboardRight = this.var.keyboardLeft = false;
+                        break;
+                        case 1://vk_up
+                            //JUMP
+                        break;
+                        case 2://vk_right
+                            this.var.keyboardRight = true;
+                        break;
+                        case 3://vk_down
+                        break;
+                        case 4://vk_left
+                            this.var.keyboardLeft = true;
+                        break;
+                    }
+                }
+            },
+            {
+                name: "gamepadAxis", code: function(event){
+                    var xAxis = event.values[0].x;
+                    if(xAxis < -0.5)//le estamos dando a la izda
+                        this.do.vk_press(vk_left);
+                    else if(xAxis > 0.5)
+                        this.do.vk_press(vk_right);
+                    else
+                        this.do.vk_press(vk_neutral);
+                }
+            },
+            {
+                name: "keyboardDown", code: function (event) {
+                    this.engine.debug.log("DOWN "+ event.key);
+                    switch (event.key) {
+                        case 37: //flecha izquierda
+                            this.do.vk_press(vk_left);
+                            break;
+                        case 38: //flecha arriba
+                            //TODO jump
+                            break;
+                        case 39: //flecha derecha
+                            this.do.vk_press(vk_right);
+                            break;
+                        case 40: //flecha abajo
+                            //this.var.ay = 1;
+                            break;
+                        case 32: //espacio
+                            //this.do.fire();
+                            break;
+                    }
+                }
+            },
+            {
+                name: "keyboardUp", code: function (event) {
+                    this.engine.debug.log("UP "+ event.key);
+                    switch (event.key) {
+                        case 37: //flecha izquierda
+                            this.do.vk_press(vk_neutral);
+                            break;
+                        case 38: //flecha arriba
+                            if(this.var.vSpeed < 0)
+                                this.var.vSpeed = Math.min(this.var.vSpeed, 2);//para detener el salto de forma mas organica
+                            break;
+                        case 39: //flecha derecha
+                            this.do.vk_press(vk_neutral);
+                            break;
+                        case 40: //flecha abajo
+                            //this.var.ay = 1;
+                            break;
+                        case 32: //espacio
+                            //this.do.fire();
+                            break;
+                    }
                 }
             }
         ]
