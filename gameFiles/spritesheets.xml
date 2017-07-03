@@ -20,7 +20,7 @@
     </frames>
   </spritesheet>
 
-  <spritesheet name="Textura1" src="images/Textura1.png">
+  <spritesheet name="texture1" src="images/Textura1.png">
     <states>
       <state name="T">
         <layer name="T"></layer>
@@ -37,7 +37,7 @@
   </spritesheet>
 
 
-  <spritesheet name="EnemigoODisparo" src="images/enemigo1.png">
+  <spritesheet name="enemigoOdisparo1" src="images/enemigo1.png">
     <states>
       <state name="E1">
         <layer name="E1"></layer>

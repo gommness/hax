@@ -47,29 +47,29 @@ CLOCKWORKRT.collisions.register([
     
 {
         shape1: "player",
-        shape2: "Block",
-        detector: function (player, Bloque) {
+        shape2: "block",
+        detector: function (player, bloque) {
            //codigo de suso
         }
     },
     {
         shape1: "player",
-        shape2: "DamageBlock",
-        detector: function (player, Bloque) {
+        shape2: "damageblock",
+        detector: function (player, bloque) {
            //codigo de suso
         }
     },
     {
         shape1: "player",
-        shape2: "DamageBlock",
-        detector: function (player, Enemigo) {
+        shape2: "damageblock",
+        detector: function (player, enemigo) {
            //codigo de suso
         }
     },
     {
         shape1: "player",
-        shape2: "DamageBlock",
-        detector: function (player, Disparo) {
+        shape2: "damageblock",
+        detector: function (player, disparo) {
            //codigo de suso
         }
     },
