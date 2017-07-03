@@ -1,4 +1,4 @@
-CLOCKWORKRT.components.register([
+/*CLOCKWORKRT.components.register([
     {
         name: "ship",
         events: [
@@ -407,4 +407,4 @@ CLOCKWORKRT.components.register([
             }
         ]
     }
-]);
+]);*/

@@ -1,4 +1,4 @@
-CLOCKWORKRT.collisions.register([
+/*CLOCKWORKRT.collisions.register([
     {
         shape1: "player",
         shape2: "enemyFire",
@@ -21,4 +21,4 @@ CLOCKWORKRT.collisions.register([
             }
         }
     }
-]);
+]);*/
