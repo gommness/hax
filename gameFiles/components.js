@@ -1,3 +1,22 @@
+CLOCKWORKRT.components.register([
+    {
+        name: "player",
+        events: [
+            {
+                name: "#setup", code: function(event){
+                    vspeed = 0;
+                    hspeed = 0;
+                }
+            },
+            {
+                name: "#loop", code: function (event){
+
+                }
+            }
+        ]
+    },
+])
+
 /*CLOCKWORKRT.components.register([
     {
         name: "ship",
