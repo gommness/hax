@@ -40,5 +40,41 @@ CLOCKWORKRT.collisions.register([
                 return false;
             }
         }
-    }
+    },
+
+
+
+    
+{
+        shape1: "player",
+        shape2: "Block",
+        detector: function (player, Bloque) {
+           //codigo de suso
+        }
+    },
+    {
+        shape1: "player",
+        shape2: "DamageBlock",
+        detector: function (player, Bloque) {
+           //codigo de suso
+        }
+    },
+    {
+        shape1: "player",
+        shape2: "DamageBlock",
+        detector: function (player, Enemigo) {
+           //codigo de suso
+        }
+    },
+    {
+        shape1: "player",
+        shape2: "DamageBlock",
+        detector: function (player, Disparo) {
+           //codigo de suso
+        }
+    },
+	
+
+
+
 ]);

@@ -6,6 +6,14 @@
     <object name="keyboard" type="keyboard" x="0" y="0" ></object>
     <object name="gamepad" type="gamepad" x="0" y="0" ></object>
     <object name="player" type="player" x="100" y="100"></object>
+
+
+    
+    <object name="sueloOLava1" type="Suelo" x="valorx1" y="valorx2" vars='{w: 96,h: 32, textura: "textura1"}'></object>
+    <object name="enemigoOdisparo1" type="Enemigo" x="valorx1" y="valorx2" vars='{w: 48,h: 32, dir: 3, speed: 8, textura: "textura2"}'></object>
+
+
+
   </level>
 </levels>
 
