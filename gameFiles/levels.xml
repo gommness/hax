@@ -10,7 +10,7 @@
 
     
     <object name="sueloOLava1" type="Suelo" x="valorx1" y="valorx2" vars='{w: 96,h: 32, textura: "textura1"}'></object>
-    <object name="enemigoOdisparo1" type="Enemigo" x="valorx1" y="valorx2" vars='{w: 48,h: 32, dir: 3, textura: "textura2"}'></object>
+    <object name="enemigoOdisparo1" type="Enemigo" x="valorx1" y="valorx2" vars='{w: 48,h: 32, dir: 3, speed: 8, textura: "textura2"}'></object>
 
 
 

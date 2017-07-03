@@ -158,14 +158,14 @@ CLOCKWORKRT.components.register([
         events: [
             {
                 name: "#setup", code: function (event) {
-                    this.var.friction = 0.03;
-                    this.var.vx = this.var.vy = 0;
-                    this.var.ax = this.var.ay = 0;
+                   this.var.vx = this.var.speed;
+                   this.var.vy = this.var.speed * this.var.dir;
                 }
             },
             {
                 name: "#loop", code: function (event) {
-                    //funcion de movimiento con ida y vuelta
+                    this.var.$x += this.var.vx;
+                    this.var.$y += this.var.vy; 
                 }
             },
             {
@@ -186,14 +186,14 @@ CLOCKWORKRT.components.register([
         events: [
             {
                 name: "#setup", code: function (event) {
-                    this.var.friction = 0.03;
-                    this.var.vx = this.var.vy = 0;
-                    this.var.ax = this.var.ay = 0;
+                   this.var.vx = this.var.speed;
+                   this.var.vy = this.var.speed * this.var.dir;
                 }
             },
             {
                 name: "#loop", code: function (event) {
-                    //funcion de movimiento solo ida
+                    this.var.$x += this.var.vx;
+                    this.var.$y += this.var.vy; 
                 }
             },
             {
