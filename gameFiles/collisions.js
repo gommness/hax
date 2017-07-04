@@ -28,9 +28,6 @@ CLOCKWORKRT.collisions.register([
         shape1: "player",
         shape2: "block",
         detector: function (player, block) {
-            // if ((player.x + player.w >= block.x && player.x + player.w <= block.x + block.w && player.y + player.h >= block.y && player.y + player.h <= block.y + block.h) ||
-            //     (player.x >= block.x && player.x <= block.x + block.w && player.y + player.h >= block.y && player.y + player.h <= )
-            // {
             if ( 
                 ((player.x >= block.x && player.x <= block.x + block.w) || (player.x + player.w >= block.x && player.x + player.w <= block.x + block.w)) &&
                 ((player.y >= block.y && player.y <= block.y + block.h) || (player.y + player.h >= block.y && player.y + player.h <= block.y + block.h))
@@ -47,29 +44,29 @@ CLOCKWORKRT.collisions.register([
     
 {
         shape1: "player",
-        shape2: "Block",
-        detector: function (player, Bloque) {
+        shape2: "block",
+        detector: function (player, bloque) {
            //codigo de suso
         }
     },
     {
         shape1: "player",
-        shape2: "DamageBlock",
-        detector: function (player, Bloque) {
+        shape2: "damageblock",
+        detector: function (player, bloque) {
            //codigo de suso
         }
     },
     {
         shape1: "player",
-        shape2: "DamageBlock",
-        detector: function (player, Enemigo) {
+        shape2: "damageblock",
+        detector: function (player, enemigo) {
            //codigo de suso
         }
     },
     {
         shape1: "player",
-        shape2: "DamageBlock",
-        detector: function (player, Disparo) {
+        shape2: "damageblock",
+        detector: function (player, disparo) {
            //codigo de suso
         }
     },

@@ -20,7 +20,25 @@
     </frames>
   </spritesheet>
 
-  <spritesheet name="Textura1" src="images/Textura1.png">
+  <spritesheet name="block" src="images/block.png">
+    <!--PLAYER STATES-->
+    <states>
+      <state name="Idle">
+        <layer name="Idle"></layer>
+      </state>
+    </states>
+    <!--PLAYER LAYERS-->
+    <layers>
+      <layer name="Idle" x="0" y="0">
+        <frame name="Idle"></frame>
+      </layer>
+    </layers>
+    <!--PLAYER FRAMES-->
+    <frames>
+      <frame name="Idle" x="0" y="0" w="100" h="100" t="100"></frame>
+    </frames>
+  </spritesheet>
+  <spritesheet name="texture1" src="images/Textura1.png">
     <states>
       <state name="T">
         <layer name="T"></layer>
@@ -37,7 +55,7 @@
   </spritesheet>
 
 
-  <spritesheet name="EnemigoODisparo" src="images/enemigo1.png">
+  <spritesheet name="enemigoOdisparo1" src="images/enemigo1.png">
     <states>
       <state name="E1">
         <layer name="E1"></layer>
