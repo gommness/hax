@@ -27,7 +27,32 @@ CLOCKWORKRT.components.register([
             },
             {
                 name: "#loop", code: function (event){
-                    arrayCollisions = this.engine.collisionQuery("player", {"x": this.var.x, "y": this.var.y, "w": this.var.w, "h": this.var.h});
+                    /*
+                    var collider = null;
+                    var arrayCollisions = this.engine.collisionQuery("player", {"x": this.var.$x + this.var.hSpeed, 
+                        "y": this.var.$y + this.var.vSpeed, "w": this.var.w + this.var.hSpeed,
+                         "h": this.var.h + this.var.vSpeed});
+                    if(arrayCollisions != null){
+                        arrayCollisions = this.engine.collisionQuery("player", {"x": this.var.$x + this.var.hSpeed, 
+                        "y": this.var.$y, "w": this.var.w + this.var.hSpeed,"h": this.var.h});
+                        if(arrayCollisions != null){//colisionaremos lateralmente con algo
+                            collider = arrayCollisions[0];
+                            if(this.var.hSpeed > 0)
+                                this.var.$x = collider.var.$x - this.var.w;
+                            else
+                                this.var.$x = collider.var.$x - collider.var.w;
+                        }
+                        arrayCollisions = this.engine.collisionQuery("player", {"x": this.var.$x, 
+                        "y": this.var.$y + this.var.vSpeed, "w": this.var.w, "h": this.var.h + this.var.vSpeed});
+                        if(arrayCollisions != null){//colisionamos verticalmente con algo
+                            collider = arrayCollisions[0];
+                            if(this.var.vSpeed < 0)
+                                this.var.$y = collider.var.$y + collider.var.h;
+                            else
+                                this.var.$y = collider.var.$y + this.var.h;
+                        }
+                    }
+                    */
 
                     if(this.var.keyboardRight && !this.var.keyboardLeft)//nos movemos a la derecha
                         this.var.hSpeed = this.var.moveSpeed;
@@ -212,108 +237,7 @@ CLOCKWORKRT.components.register([
                 { "x": 0, "y": 0, "w": 100, "h": 100, "#tag": "playerCollision" },
             ]
         }
-    },
-
-
-    {
-        name: "block",
-        events: [
-            {
-                name: "#setup", code: function (event) {
-                    for(var i=0; i < this.var.w; i++)
-                         for(var j=0; j < this.var.h; j++)
-                            var texture= this.engine.spawn(this.var.texture, "component", {$x:i*32+this.var.$x, $y:j*32+this.var.$y});
-                }
-            }
-        ]
-    },
-    {
-        name: "suelo",
-        inherits: "block",
-        collision: {
-            "block": [
-                { "x": 0, "y": 0, "w": this.var.w, "h": this.var.h},
-            ]
-        }
-    },
-    {
-        name: "lava",
-        inherits: "block",
-        collision: {
-            "damageblock": [
-                { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h },
-            ]
-        }
-    },
-    {
-        name: "enemy",
-        events: [
-            {
-                name: "#setup", code: function (event) {
-                   this.var.vx = this.var.speed;
-                   this.var.vy = this.var.speed * this.var.dir;
-                }
-            },
-            {
-                name: "#loop", code: function (event) {
-                    this.var.$x += this.var.vx;
-                    this.var.$y += this.var.vy; 
-                }
-            },
-            {
-                name: "#collide", code: function (event) {
-                    this.var.dir = -this.var.dir
-                }
-            }
-        ],
-        collision: {
-            "damageblock": [
-                { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h },
-            ]
-        }
-    },
-    {
-        name: "disparo",
-        events: [
-            {
-                name: "#setup", code: function (event) {
-                   this.var.vx = this.var.speed;
-                   this.var.vy = this.var.speed * this.var.dir;
-                }
-            },
-            {
-                name: "#loop", code: function (event) {
-                    this.var.$x += this.var.vx;
-                    this.var.$y += this.var.vy; 
-                }
-            },
-            {
-                name: "#collide", code: function (event) {
-                    var explode = this.engine.spawn("explosion", "component", {$x:0, $y:0})
-                    this.destroy
-                }
-            }
-        ],
-        collision: {
-            "damageblock": [
-                { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h },
-            ]
-        }
-    },
-    {
-        name: "texture1",
-        sprite: "suelo1"
-    },
-    {
-        name: "enemy1",
-        inherits: "enemy",
-        sprite: "enemigo1"
-    },
-    {
-        name: "disparo1",
-        inherits: "disparo",
-        sprite: "disparo1"
-    },
+    }
 	
 
 ])
