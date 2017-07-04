@@ -3,7 +3,10 @@ var vk_up = 1;
 var vk_right = 2;
 var vk_down = 3;
 var vk_left = 4;
-
+var resolution_height = 768;
+var level_height = 2208;
+var cam_limit_down = level_height - resolution_height;
+var cam_limit_up = Math.floor(resolution_height/2);
 
 CLOCKWORKRT.components.register([
     {
@@ -15,6 +18,10 @@ CLOCKWORKRT.components.register([
                     this.var.keyboardRight = false;
                     this.var.keyboardLeft = false;
                     this.var.keyboardJump = false;
+
+                    this.engine.var.$cameraX = 0;
+                    this.engine.var.$cameraY = 0;
+                    this.var.cameraY = 0;
 
                     this.var.moveSpeed = 4; //velocidad a la que se moverá el jugador lateralmente
                     this.var.jumpSpeed = 30; //velocidad con la que saltará el jugador
@@ -74,8 +81,22 @@ CLOCKWORKRT.components.register([
                     }
                     this.var.$x += this.var.hSpeed;
                     this.var.$y += this.var.vSpeed;
-                    if(this.var.$y >= 700)
+                    if(this.var.$y >= level_height) {
+                        this.var.cameraY = 0;
                         this.var.$y = 0;
+                    }
+                    
+                    var tentativeCameraY = this.var.$y - cam_limit_up;
+                    //Movemos la camara
+                    if (tentativeCameraY >= cam_limit_down) {
+                        this.engine.var.$cameraY = cam_limit_down;
+                    } else if (tentativeCameraY <= 0){
+                        this.engine.var.$cameraY = 0;
+                    } else {
+                        this.engine.var.$cameraY = tentativeCameraY;
+                    }
+                    
+                
                     /*
                     TODO:
                         si no estoy de pie en un solido, vspeed += gravity
@@ -86,7 +107,6 @@ CLOCKWORKRT.components.register([
             },
             {
                 name: "vk_press", code: function(event){
-                    this.engine.debug.log(event);
                     switch(event){
                         case 0://vk_neutral
                             this.var.keyboardRight = this.var.keyboardLeft = false;
@@ -107,7 +127,6 @@ CLOCKWORKRT.components.register([
             },
             {
                 name: "vk_release", code: function(event){
-
                     switch(event){
                         case 0://vk_neutral
                             //this.var.keyboardRight = this.var.keyboardLeft = false;
@@ -128,14 +147,12 @@ CLOCKWORKRT.components.register([
             },
             {
                 name: "gamepadDown", code: function(event){
-                    this.engine.debug.log(event.name);
                     if(event.name == "A")
                         this.do.vk_press(vk_up);
                 }
             },
             {
                 name: "gamepadUp", code: function(event){
-                    this.engine.debug.log(event.name);
                     if(event.name == "A")
                         this.do.vk_release(vk_up);
                 }
@@ -153,7 +170,6 @@ CLOCKWORKRT.components.register([
             },
             {
                 name: "keyboardDown", code: function (event) {
-                    this.engine.debug.log("DOWN "+ event.key);
                     switch (event.key) {
                         case 37: //flecha izquierda
                             this.do.vk_press(vk_left);
@@ -175,7 +191,6 @@ CLOCKWORKRT.components.register([
             },
             {
                 name: "keyboardUp", code: function (event) {
-                    this.engine.debug.log("UP "+ event.key);
                     switch (event.key) {
                         case 37: //flecha izquierda
                             this.do.vk_press(vk_neutral);
@@ -237,8 +252,17 @@ CLOCKWORKRT.components.register([
                 { "x": 0, "y": 0, "w": 100, "h": 100, "#tag": "playerCollision" },
             ]
         }
+    },
+
+    {
+        name: "background"
+    },
+
+	{
+        name: "background1",
+        sprite: "background1",
+        inherits: "background"
     }
-	
 
 ])
 

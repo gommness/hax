@@ -38,8 +38,4 @@ CLOCKWORKRT.collisions.register([
             }
         }
     },
-	
-
-
-
 ]);

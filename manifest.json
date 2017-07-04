@@ -12,7 +12,7 @@
         "spritesheets.xml"
     ],
     "screenResolution": {
-        "w": 1366,
+        "w": 1242,
         "h": 768
     },
     "dependencies": {
