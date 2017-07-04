@@ -7,6 +7,14 @@
     <object name="gamepad" type="gamepad" x="0" y="0" ></object>
     <object name="player" type="player" x="100" y="100"></object>
     <object name="block1" type="block" x="500" y="100"></object>
+
+
+    
+    <object name="sueloOlava1" type="suelo" x="valorx1" y="valorx2" vars='{w: 96,h: 32, textura: "texture1"}'></object>
+    <object name="enemigoOdisparo1" type="enemy1" x="valorx1" y="valorx2" vars='{w: 48,h: 32, dir: 3, speed: 8, texture: "enemy2"}'></object>
+
+
+
   </level>
 </levels>
 
