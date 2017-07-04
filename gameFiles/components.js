@@ -22,6 +22,11 @@ CLOCKWORKRT.components.register([
     {
         name: "player",
         sprite: "player",
+        collision: {
+            "player": [
+                { "x": 0, "y": 0, "w": 50, "h": 50, "#tag": "collenemy" }
+            ]
+        },
         events: [
             {
                 name: "#setup", code: function (event) {
@@ -268,12 +273,7 @@ CLOCKWORKRT.components.register([
             },
             {
                 name: "#collide", code: function (event) {
-                    /*
-                    this.var.$x -= this.var.hSpeed;
-                    this.var.$y -= this.var.vSpeed;
-                    this.var.keyboardLeft = false;
-                    this.var.keyboardRight = false;
-                    */
+                 
                 }
             }
         ]
@@ -347,15 +347,45 @@ CLOCKWORKRT.components.register([
 
         }
     },
+    {
+        name: "enemyshooter",
+        inherits: "enemy",
+        events: [
+           {
+                name: "#setup", code: function (event) {
+                    this.var.timer = 0;
+                    this.var.$x += this.var.speed;
+                    this.var.$y += this.var.dir;
+                }
+            },
+            {
+                name: "#loop", code: function (event) {
+                    this.var.$x += this.var.speed;
+                    this.var.$y += this.var.dir;
+                    this.var.timer++;
+                    if (this.var.timer%this.var.cadency == 0) {
+                          var tiro = this.engine.spawn("tirito", this.var.disparete,
+                             {$x:this.var.$x+this.var.w/2, $y:this.var.$y+this.var.h/2,
+                             w:this.var.dispw, h:this.var.disph,
+                             dir:this.var.dispdir, speed:this.var.dispspeed})
+                    }
+                }
+            }
+        ]
 
 
+    },
+    {
+        name: "enemydisp",
+        inherits: "enemyshooter",
+        sprite: "enemydisp"
+    },
     {
         name: "disparo",
         events: [
             {
                 name: "#setup", code: function (event) {
                    this.setCollider("collenemy", { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h});
-                   this.setCollider("collplayer", { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h});
 
                 }
             },
@@ -374,12 +404,10 @@ CLOCKWORKRT.components.register([
         ],
 
         collision: {
-             "enemy1": [
+             "bullet": [
                 { "x": 0, "y": 0, "w": 16 , "h": 16, "#tag": "collenemy"}
-            ],
-              "enemy2": [
-                { "x": 0, "y": 0, "w": 16 , "h": 16, "#tag": "collplayer"}
             ]
+            
         }
     },
 

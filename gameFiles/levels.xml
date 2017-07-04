@@ -14,11 +14,11 @@
     <object name= "e1" type="enemy1" x="0" y="0" vars='{"w": 16,"h": 16, "dir": 3, "speed": 3}'></object>
     <object name= "e2" type="enemy2" x="0" y="700" vars='{"w": 16,"h": 16, "dir": -3, "speed": 3}'></object>
 
-    <object name= "e3" type="enemy3" x="400" y="300" vars='{"w": 32,"h": 32, "dir": 0, "speed": 0}'></object>
+    <object name= "e3" type="enemy3" x="400" y="300" vars='{"w": 32,"h": 32, "dir": 0, "speed": 0}'></object> 
     <object name= "e4" type="enemy4" x="900" y="450" vars='{"w": 32,"h": 32, "dir": 0, "speed": -4.8}'></object>
 
     <object name= "d1" type="disparo1" x="200" y="450" vars='{"w": 12,"h": 12, "dir": 0, "speed": 3}'></object>
-    
+    <object name= "edisp" type="enemydisp" x="500" y="500" vars='{"w": 50,"h": 50, "dir": 0, "speed": 1, "dispdir": -6, "dispspeed": -6, "dispw": 12, "disph": 12, "cadency": 25, "disparete": "disparo1"}'></object>
 
 
   </level>
