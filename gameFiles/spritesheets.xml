@@ -96,6 +96,26 @@
       <frame name="Idle" x="0" y="0" w="1200" h="3600" t="100"></frame>
     </frames>
   </spritesheet>
+  
+  <spritesheet name="background1" src="images/fondoTorre.png">
+  <!--PLAYER STATES-->
+    <states>
+      <state name="Idle">
+        <layer name="Idle"></layer>
+      </state>
+    </states>
+    <!--PLAYER LAYERS-->
+    <layers>
+      <layer name="Idle" x="0" y="0">
+        <frame name="Idle"></frame>
+      </layer>
+    </layers>
+    <!--PLAYER FRAMES-->
+    <!--Cambiar cuando tengamos los fondos correctamnte dimensionados-->
+    <frames>
+      <frame name="Idle" x="0" y="0" w="1200" h="3600" t="100"></frame>
+    </frames>
+  </spritesheet>
 
    <spritesheet name="enemy1" src="images/enemy1.png">
     <states>

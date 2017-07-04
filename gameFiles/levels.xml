@@ -6,6 +6,7 @@
   <level id="level1">
     <object name="keyboard" type="keyboard" x="0" y="0" ></object>
     <object name="gamepad" type="gamepad" x="0" y="0" ></object>
+    <object name="background" type="background1" x="0" y="0"></object>
     
     <object name="player" type="player" x="51" y="3499"></object>
     <object name="suelo1" type="suelo" x="0" y="3550" vars='{"w": 1200,"h": 50, "textura": "textura1_1"}'></object>
