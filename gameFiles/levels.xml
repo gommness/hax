@@ -9,9 +9,9 @@
     <object name="player" type="player" x="100" y="100"></object>
     
 
-    <!--
-    <object name="sueloOlava1" type="suelo" x="valorx1" y="valorx2" vars='{w: 96,h: 32, textura: "texture1"}'></object>
-    -->
+    
+    <object name="suelo1" type="suelo" x="250" y="250" vars='{"w": 100,"h": 50, "textura": "textura1"}'></object>
+    
 
     <object name= "e1" type="enemy1" x="0" y="0" vars='{"w": 16,"h": 16, "dir": 3, "speed": 3}'></object>
     <object name= "e2" type="enemy2" x="0" y="700" vars='{"w": 16,"h": 16, "dir": -3, "speed": 3}'></object>

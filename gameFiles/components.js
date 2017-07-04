@@ -172,15 +172,15 @@ CLOCKWORKRT.components.register([
         ]
     },
 
-
-   /* {
+    {
         name: "block",
         events: [
             {
                 name: "#setup", code: function (event) {
-                    for(var i=0; i < this.var.w; i++)
-                         for(var j=0; j < this.var.h; j++)
-                            var texture= this.engine.spawn("textura", this.var.texture, {$x:i*32+this.var.$x, $y:j*32+this.var.$y});
+                     this.setCollider("collenemy", { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h});
+                    for(var i=0; i < this.var.w/50; i++)
+                         for(var j=0; j < this.var.h/50; j++)
+                            var texturita= this.engine.spawn("textura", this.var.textura, {$x:i*50+this.var.$x, $y:j*50+this.var.$y});
                 }
             }
         ]
@@ -190,10 +190,11 @@ CLOCKWORKRT.components.register([
         inherits: "block",
         collision: {
             "block": [
-                { "x": 0, "y": 0, "w": this.var.w, "h": this.var.h},
+                { "x": 0, "y": 0, "w": 0, "h": 0, "#tag": "collenemy"}
             ]
         }
     },
+    /*
     {
         name: "lava",
         inherits: "block",
@@ -294,6 +295,11 @@ CLOCKWORKRT.components.register([
         name: "enemy2",
         inherits: "enemy",
         sprite: "enemy2"
+    },
+    {
+        name: "textura1",
+        sprite: "textura1"
+
     },
    {
         name: "explosion",

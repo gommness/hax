@@ -181,7 +181,21 @@
     </frames>
   </spritesheet>
 
-
+ <spritesheet name="textura1" src="images/textura1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="0" y="0" w="50" h="50" t="100"></frame>
+    </frames>
+  </spritesheet>
 
 
 
