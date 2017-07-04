@@ -49,6 +49,7 @@
 <level id="level2">
     <object name="keyboard" type="keyboard" x="0" y="0" ></object>
     <object name="gamepad" type="gamepad" x="0" y="0" ></object>
+    <object name="background" type="background2" x="0" y="0"></object>
     
     <object name="player" type="player" x="150" y="3470"></object>
 
@@ -85,6 +86,7 @@
     <object name="suelo10" type="suelo" x="1000" y="350" vars='{"w": 150,"h": 50, "textura": "textura1_13"}'></object>
     <object name="suelo11" type="suelo" x="1100" y="300" vars='{"w": 150,"h": 50, "textura": "textura1_13"}'></object>
     <object name="suelo12" type="suelo" x="750" y="150" vars='{"w": 200,"h": 50, "textura": "textura1_13"}'></object>
+    <object name="meta" type="meta" x="800" y="100" vars='{"w": 50,"h": 50, "textura": "metasprite", "levelname": "level1"}'></object>
     
   </level>
 

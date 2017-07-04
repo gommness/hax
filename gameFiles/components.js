@@ -510,13 +510,13 @@ CLOCKWORKRT.components.register([
     },
 
     {
-        name: "background"
+        name: "background1",
+        sprite: "background1"
     },
 
     {
         name: "background2",
-        sprite: "background2",
-        inherits: "background"
+        sprite: "background2"
     },
     {
         name: "disparo1",
