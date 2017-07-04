@@ -5,11 +5,22 @@
   <level id="mainLevel">
     <object name="keyboard" type="keyboard" x="0" y="0" ></object>
     <object name="gamepad" type="gamepad" x="0" y="0" ></object>
-    <object name="player" type="player" x="100" y="100"></object>
-    <object name="block2" type="block" x="300" y="200"></object>
-    <object name="block3" type="block" x="100" y="400"></object> 
-    <object name="block1" type="block" x="500" y="100"></object>
+    
+    <object name="player" type="player" x="250" y="200"></object>
     <object name="fondo1" type="background1" x="0" y="0"></object>
+    
+    <object name="suelo1" type="suelo" x="250" y="250" vars='{"w": 100,"h": 50, "textura": "textura1"}'></object>
+    
+    <object name= "e1" type="enemy1" x="0" y="0" vars='{"w": 16,"h": 16, "dir": 3, "speed": 3}'></object>
+    <object name= "e2" type="enemy2" x="0" y="700" vars='{"w": 16,"h": 16, "dir": -3, "speed": 3}'></object>
+
+    <object name= "e3" type="enemy3" x="400" y="300" vars='{"w": 32,"h": 32, "dir": 0, "speed": 0}'></object>
+    <object name= "e4" type="enemy4" x="900" y="450" vars='{"w": 32,"h": 32, "dir": 0, "speed": -4.8}'></object>
+
+    <object name= "d1" type="disparo1" x="200" y="450" vars='{"w": 12,"h": 12, "dir": 0, "speed": 3}'></object>
+    
+
+
   </level>
 </levels>
 

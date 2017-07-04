@@ -20,25 +20,6 @@
     </frames>
   </spritesheet>
 
-  <spritesheet name="block" src="images/block.png">
-    <!--PLAYER STATES-->
-    <states>
-      <state name="Idle">
-        <layer name="Idle"></layer>
-      </state>
-    </states>
-    <!--PLAYER LAYERS-->
-    <layers>
-      <layer name="Idle" x="0" y="0">
-        <frame name="Idle"></frame>
-      </layer>
-    </layers>
-    <!--PLAYER FRAMES-->
-    <frames>
-      <frame name="Idle" x="50" y="50" w="50" h="50" t="100"></frame>
-    </frames>
-  </spritesheet>
-
   <spritesheet name="background1" src="images/fondo1.jpg">
   <!--PLAYER STATES-->
     <states>
@@ -58,6 +39,144 @@
       <frame name="Idle" x="0" y="0" w="1242" h="2208" t="100"></frame>
     </frames>
   </spritesheet>
+
+
+
+   <spritesheet name="enemy1" src="images/enemy1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+      <state name="E2">
+        <layer name="E2"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+      <layer name="E2" x="0" y="0">
+        <frame name="E2"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="0" y="0" w="16" h="16" t="100"></frame>
+      <frame name="E2" x="0" y="0" w="16" h="16" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+   <spritesheet name="enemy2" src="images/enemy2.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+      <state name="E2">
+        <layer name="E2"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+      <layer name="E2" x="0" y="0">
+        <frame name="E2"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="0" y="0" w="16" h="16" t="100"></frame>
+      <frame name="E2" x="0" y="0" w="16" h="16" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+  <spritesheet name="enemy3" src="images/enemy3.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+        <frame name="E2"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="0" y="0" w="50" h="50" t="500"></frame>
+      <frame name="E2" x="50" y="0" w="50" h="50" t="500"></frame>
+    </frames>
+  </spritesheet>
+
+  <spritesheet name="enemy4" src="images/enemy4.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+        <frame name="E2"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="0" y="0" w="50" h="50" t="600"></frame>
+      <frame name="E2" x="50" y="0" w="50" h="50" t="600"></frame>
+    </frames>
+  </spritesheet>
+
+  <spritesheet name="explosion" src="images/explosion.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+        <frame name="E2"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="0" y="0" w="20" h="20" t="80"></frame>
+      <frame name="E2" x="20" y="0" w="20" h="20" t="80"></frame>
+    </frames>
+  </spritesheet>
+
+  <spritesheet name="disparo1" src="images/disparo1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+        <frame name="E2"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="0" y="0" w="12" h="12" t="750"></frame>
+      <frame name="E2" x="12" y="0" w="12" h="12" t="750"></frame>
+    </frames>
+  </spritesheet>
+
+ <spritesheet name="textura1" src="images/textura1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="0" y="0" w="50" h="50" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+
 
 </spritesheets>
 

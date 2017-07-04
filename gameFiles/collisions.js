@@ -38,4 +38,84 @@ CLOCKWORKRT.collisions.register([
             }
         }
     },
+
+    {
+        shape1: "enemy1",
+        shape2: "enemy2",
+        detector: function (block, player) {
+            if ( 
+                ((player.x >= block.x && player.x <= block.x + block.w) || (player.x + player.w >= block.x && player.x + player.w <= block.x + block.w)) &&
+                ((player.y >= block.y && player.y <= block.y + block.h) || (player.y + player.h >= block.y && player.y + player.h <= block.y + block.h))
+            ) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    },
+     {
+        shape1: "enemy2",
+        shape2: "block",
+        detector: function (block, player) {
+            if ( 
+                ((player.x >= block.x && player.x <= block.x + block.w) || (player.x + player.w >= block.x && player.x + player.w <= block.x + block.w)) &&
+                ((player.y >= block.y && player.y <= block.y + block.h) || (player.y + player.h >= block.y && player.y + player.h <= block.y + block.h))
+            ) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    },
+     {
+        shape1: "enemy1",
+        shape2: "block",
+        detector: function (block, player) {
+            if ( 
+                ((player.x >= block.x && player.x <= block.x + block.w) || (player.x + player.w >= block.x && player.x + player.w <= block.x + block.w)) &&
+                ((player.y >= block.y && player.y <= block.y + block.h) || (player.y + player.h >= block.y && player.y + player.h <= block.y + block.h))
+            ) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+
+
+
+    
+    /*{
+        shape1: "player",
+        shape2: "block",
+        detector: function (player, bloque) {
+           //codigo de suso
+        }
+    },
+    {
+        shape1: "player",
+        shape2: "damageblock",
+        detector: function (player, bloque) {
+           //codigo de suso
+        }
+    },
+    {
+        shape1: "player",
+        shape2: "damageblock",
+        detector: function (player, enemigo) {
+           //codigo de suso
+        }
+    },
+    {
+        shape1: "player",
+        shape2: "damageblock",
+        detector: function (player, disparo) {
+           //codigo de suso
+        }
+    },*/
+	
+
+
+
 ]);
