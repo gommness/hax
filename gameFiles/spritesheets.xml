@@ -38,50 +38,26 @@
       <frame name="Idle" x="0" y="0" w="100" h="100" t="100"></frame>
     </frames>
   </spritesheet>
-  <spritesheet name="texture1" src="images/Textura1.png">
+
+  <spritesheet name="background1" src="images/fondo1.png">
+    <!--PLAYER STATES-->
     <states>
-      <state name="T">
-        <layer name="T"></layer>
+      <state name="Idle">
+        <layer name="Idle"></layer>
       </state>
     </states>
+    <!--PLAYER LAYERS-->
     <layers>
-      <layer name="T" x="0" y="0">
-        <frame name="T"></frame>
+      <layer name="Idle" x="0" y="0">
+        <frame name="Idle"></frame>
       </layer>
     </layers>
+    <!--PLAYER FRAMES-->
     <frames>
-      <frame name="T" x="0" y="0" w="100" h="32" t="32"></frame>
+      <frame name="Idle" x="0" y="0" w="100" h="100" t="100"></frame>
     </frames>
   </spritesheet>
-
-
-  <spritesheet name="enemigoOdisparo1" src="images/enemigo1.png">
-    <states>
-      <state name="E1">
-        <layer name="E1"></layer>
-      </state>
-      <state name="E2">
-        <layer name="E2"></layer>
-      </state>
-    </states>
-    <layers>
-      <layer name="E1" x="0" y="0">
-        <frame name="E1"></frame>
-      </layer>
-      <layer name="E2" x="0" y="0">
-        <frame name="E2"></frame>
-      </layer>
-    </layers>
-    <frames>
-      <frame name="E1" x="0" y="0" w="32" h="16" t="100"></frame>
-      <frame name="E2" x="32" y="0" w="32" h="16" t="100"></frame>
-    </frames>
-  </spritesheet>
-
-
-
-
-
+  
 </spritesheets>
 
 <!--
