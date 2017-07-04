@@ -24,7 +24,7 @@ CLOCKWORKRT.components.register([
         sprite: "player",
         collision: {
             "player": [
-                { "x": 0, "y": 0, "w": 50, "h": 50, "#tag": "collplayer" }
+                { "x": 0, "y": 0, "w": 50, "h": 50, "#tag": "collenemy" }
             ]
         },
         events: [
@@ -305,16 +305,40 @@ CLOCKWORKRT.components.register([
             ]
         }
     },
-    /*
+    {
+        name: "meta",
+        inherits: "block",
+        collision: {
+            "meta": [
+                { "x": 0, "y": 0, "w": 50, "h": 50, "#tag": "collenemy" }
+            ]
+        },
+        events: [
+            {
+                name: "#collide", code: function (event) {
+                this.engine.loadLevel(this.var.levelname);
+                }
+            }
+        ]
+    },
     {
         name: "lava",
         inherits: "block",
         collision: {
-            "damageblock": [
-                { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h },
+            "lava": [
+                { "x": 0, "y": 0, "w": 0 , "h": 0, "#tag": "collenemy"},
             ]
-        }
-    }, */
+        },
+           events: [
+            {
+                name: "#collide", code: function (event) {
+                // this.engine.debug.log(this.engine.var["#currentLevel"])
+                // this.engine.debug.log(this.engine.loadLevelByIndex.toString())
+                this.engine.loadLevelByIndex(this.engine.var["#currentLevel"]);
+                }
+            }
+        ]
+    }, 
     {
         name: "enemy",
         events: [
@@ -351,15 +375,45 @@ CLOCKWORKRT.components.register([
 
         }
     },
+    {
+        name: "enemyshooter",
+        inherits: "enemy",
+        events: [
+           {
+                name: "#setup", code: function (event) {
+                    this.var.timer = 0;
+                    this.var.$x += this.var.speed;
+                    this.var.$y += this.var.dir;
+                }
+            },
+            {
+                name: "#loop", code: function (event) {
+                    this.var.$x += this.var.speed;
+                    this.var.$y += this.var.dir;
+                    this.var.timer++;
+                    if (this.var.timer%this.var.cadency == 0) {
+                          var tiro = this.engine.spawn("tirito", this.var.disparete,
+                             {$x:this.var.$x+this.var.w/2, $y:this.var.$y+this.var.h/2,
+                             w:this.var.dispw, h:this.var.disph,
+                             dir:this.var.dispdir, speed:this.var.dispspeed})
+                    }
+                }
+            }
+        ]
 
 
+    },
+    {
+        name: "enemydisp",
+        inherits: "enemyshooter",
+        sprite: "enemydisp"
+    },
     {
         name: "disparo",
         events: [
             {
                 name: "#setup", code: function (event) {
                    this.setCollider("collenemy", { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h});
-                   this.setCollider("collplayer", { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h});
 
                 }
             },
@@ -378,12 +432,10 @@ CLOCKWORKRT.components.register([
         ],
 
         collision: {
-             "enemy1": [
+             "bullet": [
                 { "x": 0, "y": 0, "w": 16 , "h": 16, "#tag": "collenemy"}
-            ],
-              "enemy2": [
-                { "x": 0, "y": 0, "w": 16 , "h": 16, "#tag": "collplayer"}
             ]
+            
         }
     },
 
@@ -424,7 +476,13 @@ CLOCKWORKRT.components.register([
     {
         name: "textura1",
         sprite: "textura1"
-
+    },
+     {
+        name: "pinchos",
+        sprite: "pinchos"
+    }, {
+        name: "metatest",
+        sprite: "metatest"
     },
    {
         name: "explosion",

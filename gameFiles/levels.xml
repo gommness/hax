@@ -2,30 +2,12 @@
 
 <?xml version="1.0" encoding="utf-8"?>
 <levels>
-<!--
+
   <level id="mainLevel">
     <object name="keyboard" type="keyboard" x="0" y="0" ></object>
     <object name="gamepad" type="gamepad" x="0" y="0" ></object>
     
-    <object name="player" type="player" x="250" y="200"></object>
-    <object name="fondo1" type="background1" x="0" y="0"></object>
-    
-    <object name="suelo1" type="suelo" x="250" y="500" vars='{"w": 700,"h": 50, "textura": "textura1"}'></object>
-    
-    <object name= "e1" type="enemy1" x="0" y="0" vars='{"w": 16,"h": 16, "dir": 3, "speed": 3}'></object>
-    <object name= "e2" type="enemy2" x="0" y="700" vars='{"w": 16,"h": 16, "dir": -3, "speed": 3}'></object>
-
-    <object name= "e3" type="enemy3" x="400" y="300" vars='{"w": 50,"h": 50, "dir": 0, "speed": 0}'></object>
-    <object name= "e4" type="enemy4" x="900" y="450" vars='{"w": 50,"h": 50, "dir": 0, "speed": -4.8}'></object>
-
-    <object name= "d1" type="disparo1" x="200" y="450" vars='{"w": 12,"h": 12, "dir": 0, "speed": 3}'></object>
-   </level> 
--->
-  <level id="mainLevel">
-    <object name="keyboard" type="keyboard" x="0" y="0" ></object>
-    <object name="gamepad" type="gamepad" x="0" y="0" ></object>
-    
-    <object name="player" type="player" x="1000" y="1000"></object>
+    <object name="player" type="player" x="150" y="3470"></object>
 
     <object name="paredI" type="suelo" x="0" y="0" vars='{"w": 50,"h": 3600, "textura": "textura1"}'></object>
     <object name="paredD" type="suelo" x="1150" y="0" vars='{"w": 50,"h": 3600, "textura": "textura1"}'></object>
@@ -64,22 +46,6 @@
     
     
     
-    
-    
-
-    <!--
-    <object name="suelo10" type="suelo" x="3550" y="0" vars='{"w": 1200,"h": 50, "textura": "textura1"}'></object>
-    <object name="suelo11" type="suelo" x="3550" y="0" vars='{"w": 1200,"h": 50, "textura": "textura1"}'></object>
-    <object name="suelo12" type="suelo" x="3550" y="0" vars='{"w": 1200,"h": 50, "textura": "textura1"}'></object>
-    <object name="suelo13" type="suelo" x="3550" y="0" vars='{"w": 1200,"h": 50, "textura": "textura1"}'></object>
-    <object name="suelo14" type="suelo" x="3550" y="0" vars='{"w": 1200,"h": 50, "textura": "textura1"}'></object>
-    <object name="suelo15" type="suelo" x="3550" y="0" vars='{"w": 1200,"h": 50, "textura": "textura1"}'></object>
-    <object name="suelo16" type="suelo" x="3550" y="0" vars='{"w": 1200,"h": 50, "textura": "textura1"}'></object>
-    <object name="suelo17" type="suelo" x="3550" y="0" vars='{"w": 1200,"h": 50, "textura": "textura1"}'></object>
-    <object name="suelo18" type="suelo" x="3550" y="0" vars='{"w": 1200,"h": 50, "textura": "textura1"}'></object>
-    <object name="suelo19" type="suelo" x="3550" y="0" vars='{"w": 1200,"h": 50, "textura": "textura1"}'></object>
-    <object name="suelo20" type="suelo" x="3550" y="0" vars='{"w": 1200,"h": 50, "textura": "textura1"}'></object>
-    -->
     
 
     
@@ -120,12 +86,14 @@
 
     <object name="suelo25" type="suelo" x="600" y="800" vars='{"w": 150,"h": 50, "textura": "textura1"}'></object>
     <object name="suelo26" type="suelo" x="200" y="700" vars='{"w": 150,"h": 50, "textura": "textura1"}'></object>
-    <object name="suelo26" type="suelo" x="1000" y="700" vars='{"w": 150,"h": 50, "textura": "textura1"}'></object>
-    <object name="suelo26" type="suelo" x="400" y="500" vars='{"w": 150,"h": 50, "textura": "textura1"}'></object>
-    <object name="suelo26" type="suelo" x="800" y="500" vars='{"w": 150,"h": 50, "textura": "textura1"}'></object>
-    <object name="suelo26" type="suelo" x="50" y="300" vars='{"w": 150,"h": 600, "textura": "textura1"}'></object>
-    <object name="suelo26" type="suelo" x="0" y="0" vars='{"w": 1200,"h": 50, "textura": "textura1"}'></object>
+    <object name="suelo27" type="suelo" x="1000" y="700" vars='{"w": 150,"h": 50, "textura": "textura1"}'></object>
+    <object name="suelo28" type="suelo" x="400" y="500" vars='{"w": 150,"h": 50, "textura": "textura1"}'></object>
+    <object name="suelo29" type="suelo" x="800" y="500" vars='{"w": 150,"h": 50, "textura": "textura1"}'></object>
+    <object name="suelo30" type="suelo" x="50" y="300" vars='{"w": 150,"h": 600, "textura": "textura1"}'></object>
+    <object name="suelo31" type="suelo" x="0" y="0" vars='{"w": 1200,"h": 50, "textura": "textura1"}'></object>
   </level>
+
+
 </levels>
 
 
