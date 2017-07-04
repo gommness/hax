@@ -1,26 +1,83 @@
 
 <?xml version="1.0" encoding="utf-8"?>
 <spritesheets>
-  <spritesheet name="player" src="images/spriteSheet.png">
+  <spritesheet name="player" src="images/playerSpriteSheet.png">
     <!--PLAYER STATES-->
     <states>
-      <state name="Idle">
-        <layer name="Idle"></layer>
+      <state name="quietoIzda">
+        <layer name="quietoIzda"></layer>
+      </state>
+      <state name="quietoDcha">
+        <layer name="quietoDcha"></layer>
+      </state>
+      <state name="correIzda">
+        <layer name="correIzda"></layer>
+      </state>
+      <state name="correDcha">
+        <layer name="correDcha"></layer>
+      </state>
+      <state name="saltoIzdaUp">
+        <layer name="saltoIzdaUp"></layer>
+      </state>
+      <state name="saltoDchaUp">
+        <layer name="saltoDchaUp"></layer>
+      </state>
+      <state name="saltoIzdaDown">
+        <layer name="saltoIzdaDown"></layer>
+      </state>
+      <state name="saltoDchaDown">
+        <layer name="saltoDchaDown"></layer>
       </state>
     </states>
     <!--PLAYER LAYERS-->
     <layers>
-      <layer name="Idle" x="0" y="0">
-        <frame name="Idle"></frame>
+      <layer name="quietoIzda" x="0" y="0">
+        <frame name="quietoIzda1"></frame>
+        <frame name="quietoIzda2"></frame>
+      </layer>
+      <layer name="quietoDcha" x="0" y="0">
+        <frame name="quietoDcha1"></frame>
+        <frame name="quietoDcha2"></frame>
+      </layer>
+      <layer name="correIzda" x="0" y="0">
+        <frame name="correIzda1"></frame>
+        <frame name="correIzda2"></frame>
+      </layer>
+      <layer name="correDcha" x="0" y="0">
+        <frame name="correDcha1"></frame>
+        <frame name="correDcha2"></frame>
+      </layer>
+      <layer name="saltoIzdaUp" x="0" y="0">
+        <frame name="saltoIzdaUp"></frame>
+      </layer>
+      <layer name="saltoDchaUp" x="0" y="0">
+        <frame name="saltoDchaUp"></frame>
+      </layer>
+      <layer name="saltoIzdaDown" x="0" y="0">
+        <frame name="saltoIzdaDown"></frame>
+      </layer>
+      <layer name="saltoDchaDown" x="0" y="0">
+        <frame name="saltoDchaDown"></frame>
       </layer>
     </layers>
     <!--PLAYER FRAMES-->
     <frames>
-      <frame name="Idle" x="0" y="0" w="50" h="50" t="100"></frame>
+      <frame name="quietoIzda1" x="100" y="0" w="50" h="50" t="200"></frame>
+      <frame name="quietoIzda2" x="150" y="0" w="50" h="50" t="200"></frame>
+      <frame name="quietoDcha1" x="0" y="0" w="50" h="50" t="200"></frame>
+      <frame name="quietoDcha2" x="50" y="0" w="50" h="50" t="200"></frame>
+      <frame name="correIzda1" x="100" y="50" w="50" h="50" t="200"></frame>
+      <frame name="correIzda2" x="150" y="50" w="50" h="50" t="200"></frame>
+      <frame name="correDcha1" x="0" y="50" w="50" h="50" t="200"></frame>
+      <frame name="correDcha2" x="50" y="50" w="50" h="50" t="200"></frame>
+      <frame name="saltoIzdaUp" x="150" y="100" w="50" h="50" t="50"></frame>
+      <frame name="saltoDchaUp" x="0" y="100" w="50" h="50" t="50"></frame>
+      <frame name="saltoIzdaDown" x="100" y="100" w="50" h="50" t="50"></frame>
+      <frame name="saltoDchaDown" x="50" y="100" w="50" h="50" t="50"></frame>
     </frames>
   </spritesheet>
 
-  <spritesheet name="background1" src="images/fondo1.jpg">
+  <spritesheet name="background2" src="images/fondogalaxia.png">
   <!--PLAYER STATES-->
     <states>
       <state name="Idle">
@@ -36,11 +93,9 @@
     <!--PLAYER FRAMES-->
     <!--Cambiar cuando tengamos los fondos correctamnte dimensionados-->
     <frames>
-      <frame name="Idle" x="0" y="0" w="1242" h="2208" t="100"></frame>
+      <frame name="Idle" x="0" y="0" w="1200" h="3600" t="100"></frame>
     </frames>
   </spritesheet>
-
-
 
    <spritesheet name="enemy1" src="images/enemy1.png">
     <states>
@@ -159,6 +214,23 @@
       <frame name="E2" x="20" y="0" w="20" h="20" t="80"></frame>
     </frames>
   </spritesheet>
+
+  <spritesheet name="humos" src="images/objetos50x50.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="50" y="0" w="50" h="50" t="80"></frame>
+    </frames>
+  </spritesheet>
+
 
   <spritesheet name="disparo1" src="images/disparo1.png">
     <states>
