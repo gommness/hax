@@ -3,18 +3,18 @@ var vk_up = 1;
 var vk_right = 2;
 var vk_down = 3;
 var vk_left = 4;
-var resolution_height = 768;
-var level_height = 2208;
+var resolution_height = 750;
+var level_height = 3600;
 var cam_limit_down = level_height - resolution_height;
-var cam_limit_up = Math.floor(resolution_height/2);
+var cam_limit_up = Math.floor(resolution_height / 2);
 var w = 50;
 var h = 50;
 
-function checkCollision(x1,y1,w1,h1, x2,y2,w2,h2){
-    return( 
-            ((x1 >= x2 && x1 <= x2 + w2) || (x1 + w1 >= x2 && x1 + w1 <= x2 + w2)) &&
-            ((y1 >= y2 && y1 <= y2 + h2) || (y1 + h1 >= y2 && y1 + h1 <= y2 + h2))
-        );
+function checkCollision(x1, y1, w1, h1, x2, y2, w2, h2) {
+    return (
+        ((x1 >= x2 && x1 <= x2 + w2) || (x1 + w1 >= x2 && x1 + w1 <= x2 + w2)) &&
+        ((y1 >= y2 && y1 <= y2 + h2) || (y1 + h1 >= y2 && y1 + h1 <= y2 + h2))
+    );
 }
 
 
@@ -22,9 +22,14 @@ CLOCKWORKRT.components.register([
     {
         name: "player",
         sprite: "player",
+        collision: {
+            "player": [
+                { "x": 0, "y": 0, "w": 50, "h": 50, "#tag": "collenemy" }
+            ]
+        },
         events: [
             {
-                name: "#setup", code: function(event){
+                name: "#setup", code: function (event) {
                     this.var.keyboardRight = false;
                     this.var.keyboardLeft = false;
                     this.var.keyboardJump = false;
@@ -33,65 +38,82 @@ CLOCKWORKRT.components.register([
                     this.engine.var.$cameraY = 0;
                     this.var.cameraY = 0;
 
-                    this.var.moveSpeed = 4; //velocidad a la que se moverá el jugador lateralmente
-                    this.var.jumpSpeed = 20; //velocidad con la que saltará el jugador
+                    this.var.moveSpeed = 12; //velocidad a la que se moverá el jugador lateralmente
+                    this.var.jumpSpeed = 24; //velocidad con la que saltará el jugador
                     this.var.vLimit = 30;
                     this.var.vSpeed = 0; //velocidad vertical
-                    this.var.hSpeed = 4; //velocidad horizontal
-                    this.var.gravity = 1; //velocidad de la gravedad que afecta al jugador
+                    this.var.hSpeed = 0; //velocidad horizontal
+                    this.var.gravity = 2; //velocidad de la gravedad que afecta al jugador
                     this.var.jumpEnable = true;
                     this.var.onFloor = false;
                 }
             },
             {
-                name: "#loop", code: function (event){
-                    this.var.onFloor = (this.engine.collisionQuery("player", {"x": this.var.$x, 
-                        "y": this.var.$y + 1, "w": w, "h": h}).length != 0);
+                name: "#loop", code: function (event) {
+                    this.var.onFloor = (this.engine.collisionQuery("player", {
+                        "x": this.var.$x,
+                        "y": this.var.$y + 1, "w": w, "h": h
+                    }).length != 0);
 
-                    if(this.var.keyboardRight && !this.var.keyboardLeft)//nos movemos a la derecha
+                    if (this.var.keyboardRight && !this.var.keyboardLeft)//nos movemos a la derecha
                         this.var.hSpeed = this.var.moveSpeed;
-                    else if(!this.var.keyboardRight && this.var.keyboardLeft)//nos movemos a la izquierda
+                    else if (!this.var.keyboardRight && this.var.keyboardLeft)//nos movemos a la izquierda
                         this.var.hSpeed = -this.var.moveSpeed;
                     else
                         this.var.hSpeed = 0;
 
 
                     this.var.vSpeed += this.var.gravity;
-                    if(this.var.vSpeed >= this.var.vLimit)
+                    if (this.var.vSpeed >= this.var.vLimit)
                         this.var.vSpeed = this.var.vLimit;
                     //JUMPING
-                    if(this.var.onFloor == true){
+                    if (this.var.onFloor == true) {
                         //TODO comprobar, para el salto normal, que haya colision con suelo debajo del jugador
                         this.var.jumpEnable = true;
-                        if(this.var.keyboardJump){
+                        if (this.var.keyboardJump) {
                             this.var.vSpeed = -this.var.jumpSpeed;//doble salto
                             this.var.keyboardJump = false;
                         }
-                    } else if(this.var.jumpEnable == true && this.var.keyboardJump){
-                        this.var.vSpeed = -this.var.jumpSpeed;//doble salto
-                        this.var.keyboardJump = false;
-                        this.var.jumpEnable = false;
+                    } else if (this.var.keyboardJump) {
+                        if((this.var.keyboardLeft && (this.engine.collisionQuery("player", {"x": this.var.$x + 24,
+                        "y": this.var.$y, "w": w, "h": h}).length != 0)) ||
+                        (this.var.keyboardRight && (this.engine.collisionQuery("player", {"x": this.var.$x - 24,
+                        "y": this.var.$y, "w": w, "h": h}).length != 0))){
+                            this.var.vSpeed = -this.var.jumpSpeed;
+                            this.var.keyboardJump = false;
+                        }
+                        else if(this.var.jumpEnable == true){
+                            this.var.vSpeed = -this.var.jumpSpeed;//doble salto
+                            this.var.keyboardJump = false;
+                            this.var.jumpEnable = false;
+                        }
                     }
 
                     var collider = null;
                     var aux = 0;
-                    var arrayCollisions = this.engine.collisionQuery("player", {"x": this.var.$x + this.var.hSpeed, 
-                        "y": this.var.$y + this.var.vSpeed, "w": w, "h": h});
-                    this.engine.debug.log(JSON.stringify({"x": this.var.$x + this.var.hSpeed, 
-                        "y": this.var.$y + this.var.vSpeed, "w": w, "h": h}));
+                    var arrayCollisions = this.engine.collisionQuery("player", {
+                        "x": this.var.$x + this.var.hSpeed,
+                        "y": this.var.$y + this.var.vSpeed, "w": w, "h": h
+                    });
+                    this.engine.debug.log(JSON.stringify({
+                        "x": this.var.$x + this.var.hSpeed,
+                        "y": this.var.$y + this.var.vSpeed, "w": w, "h": h
+                    }));
                     this.engine.debug.log("collision length: " + arrayCollisions.length);
                     //this.engine.debug.log("x: " + this.var.$x + " y: " + this.var.$y + " w: " + (this.var.$x+w) + " h: " + (this.var.$y+h));
-                    
-                    if(arrayCollisions.length != 0){
-                        arrayCollisions = this.engine.collisionQuery("player", {"x": this.var.$x + this.var.hSpeed, 
-                        "y": this.var.$y, "w":w,"h": h});
-                        if(arrayCollisions.length != 0){//colisionaremos lateralmente con algo
+
+                    if (arrayCollisions.length != 0) {
+                        arrayCollisions = this.engine.collisionQuery("player", {
+                            "x": this.var.$x + this.var.hSpeed,
+                            "y": this.var.$y, "w": w, "h": h
+                        });
+                        if (arrayCollisions.length != 0) {//colisionaremos lateralmente con algo
                             this.engine.debug.log("COLISION HORIZONTAL");
                             collider = arrayCollisions[0];
                             aux = Math.sign(collider.var.$x - this.var.$x);
                             this.var.hSpeed = aux;
-                            if(aux != 0){
-                                while(!checkCollision(this.var.$x + this.var.hSpeed,this.var.$y,w,h, collider.var.$x,collider.var.$y,w,h)){
+                            if (aux != 0) {
+                                while (!checkCollision(this.var.$x + this.var.hSpeed, this.var.$y, w, h, collider.var.$x, collider.var.$y, collider.var.w, collider.var.h)) {
                                     this.var.hSpeed += aux;
                                 }
                                 this.var.$x += this.var.hSpeed - aux;
@@ -100,15 +122,17 @@ CLOCKWORKRT.components.register([
                         } else {
                             this.var.$x += this.var.hSpeed;
                         }
-                        arrayCollisions = this.engine.collisionQuery("player", {"x": this.var.$x, 
-                        "y": this.var.$y + this.var.vSpeed, "w": w, "h": h});
-                        if(arrayCollisions.length != 0){//colisionamos verticalmente con algo
+                        arrayCollisions = this.engine.collisionQuery("player", {
+                            "x": this.var.$x,
+                            "y": this.var.$y + this.var.vSpeed, "w": w, "h": h
+                        });
+                        if (arrayCollisions.length != 0) {//colisionamos verticalmente con algo
                             this.engine.debug.log("COLISION VERTICAL");
                             collider = arrayCollisions[0];
                             aux = Math.sign(collider.var.$y - this.var.$y);
                             this.var.vSpeed = aux;
-                            if(aux != 0){
-                                while(!checkCollision(this.var.$x,this.var.$y + this.var.vSpeed,w,h, collider.var.$x,collider.var.$y,w,h)){
+                            if (aux != 0) {
+                                while (!checkCollision(this.var.$x, this.var.$y + this.var.vSpeed, w, h, collider.var.$x, collider.var.$y, collider.var.w, collider.var.h)) {
                                     this.var.vSpeed += aux;
                                 }
                                 this.var.$y += this.var.vSpeed - aux;
@@ -121,94 +145,86 @@ CLOCKWORKRT.components.register([
                         this.var.$x += this.var.hSpeed;
                         this.var.$y += this.var.vSpeed;
                     }
-                    if(this.var.$y >= level_height) {
+                    if (this.var.$y >= level_height) {
                         this.var.cameraY = 0;
                         this.var.$y = 0;
                     }
-                    
+
                     var tentativeCameraY = this.var.$y - cam_limit_up;
                     //Movemos la camara
                     if (tentativeCameraY >= cam_limit_down) {
                         this.engine.var.$cameraY = cam_limit_down;
-                    } else if (tentativeCameraY <= 0){
+                    } else if (tentativeCameraY <= 0) {
                         this.engine.var.$cameraY = 0;
                     } else {
                         this.engine.var.$cameraY = tentativeCameraY;
                     }
-                    
-                
-                    /*
-                    TODO:
-                        si no estoy de pie en un solido, vspeed += gravity
-                        si en x+hspeed o y+vspeed hay una colision con un solido
-                        me snappeo al grid mas cercano
-                    */
                 }
             },
             {
-                name: "vk_press", code: function(event){
-                    switch(event){
+                name: "vk_press", code: function (event) {
+                    switch (event) {
                         case 0://vk_neutral
                             this.var.keyboardRight = this.var.keyboardLeft = false;
-                        break;
+                            break;
                         case 1://vk_up
                             this.var.keyboardJump = true;
-                        break;
+                            break;
                         case 2://vk_right
                             this.var.keyboardRight = true;
-                        break;
+                            break;
                         case 3://vk_down
-                        break;
+                            break;
                         case 4://vk_left
                             this.var.keyboardLeft = true;
-                        break;
+                            break;
                     }
                 }
             },
             {
-                name: "vk_release", code: function(event){
-                    switch(event){
+                name: "vk_release", code: function (event) {
+                    switch (event) {
                         case 0://vk_neutral
                             //this.var.keyboardRight = this.var.keyboardLeft = false;
-                        break;
+                            break;
                         case 1://vk_up
-                            this.var.vSpeed = Math.max(this.var.vSpeed, -0.25*this.var.jumpSpeed);//para detener el salto de forma mas organica
-                        break;
+                            this.var.vSpeed = Math.max(this.var.vSpeed, -0.25 * this.var.jumpSpeed);//para detener el salto de forma mas organica
+                            break;
                         case 2://vk_right
                             this.var.keyboardRight = false;
-                        break;
+                            break;
                         case 3://vk_down
-                        break;
+                            break;
                         case 4://vk_left
                             this.var.keyboardLeft = false;
-                        break;
+                            break;
                     }
                 }
             },
             {
-                name: "gamepadDown", code: function(event){
-                    if(event.name == "A")
+                name: "gamepadDown", code: function (event) {
+                    if (event.name == "A")
                         this.do.vk_press(vk_up);
                 }
             },
             {
-                name: "gamepadUp", code: function(event){
-                    if(event.name == "A")
+                name: "gamepadUp", code: function (event) {
+                    if (event.name == "A")
                         this.do.vk_release(vk_up);
                 }
             },
             {
-                name: "gamepadAxis", code: function(event){
+                name: "gamepadAxis", code: function (event) {
                     var xAxis = event.values[0].x;
-                    if(xAxis < -0.5){//le estamos dando a la izda
+                    if (xAxis < -0.5) {//le estamos dando a la izda
                         this.do.vk_press(vk_left);
                         this.do.vk_release(vk_right);
                     }
-                    else if(xAxis > 0.5){
+                    else if (xAxis > 0.5) {
                         this.do.vk_press(vk_right);
                         this.do.vk_release(vk_left);
                     }
-                    else{
+                    else {
                         this.do.vk_press(vk_neutral);
                     }
                 }
@@ -242,7 +258,7 @@ CLOCKWORKRT.components.register([
                             break;
                         case 38: //flecha arriba
                             //if(this.var.vSpeed < 0)
-                                this.do.vk_release(vk_up);
+                            this.do.vk_release(vk_up);
                             break;
                         case 39: //flecha derecha
                             this.do.vk_press(vk_neutral);
@@ -258,44 +274,168 @@ CLOCKWORKRT.components.register([
             },
             {
                 name: "#collide", code: function (event) {
-                    /*
-                    this.var.$x -= this.var.hSpeed;
-                    this.var.$y -= this.var.vSpeed;
-                    this.var.keyboardLeft = false;
-                    this.var.keyboardRight = false;
-                    */
+                    if(event.shape2kind == "enemy1"){
+                        this.engine.debug.log("colision con enemy1: " + this.engine.var['#currentLevel']);
+                        this.engine.loadLevelByIndex(this.engine.var['#currentLevel']);
+                    }
+                }
+            }
+        ]
+    },
+
+    {
+        name: "block",
+        events: [
+            {
+                name: "#setup", code: function (event) {
+                    this.setCollider("collenemy", { "x": 0, "y": 0, "w": this.var.w, "h": this.var.h });
+                    for (var i = 0; i < this.var.w / 50; i++)
+                        for (var j = 0; j < this.var.h / 50; j++)
+                            var texturita = this.engine.spawn("textura", this.var.textura, { $x: i * 50 + this.var.$x, $y: j * 50 + this.var.$y });
+                }
+            }
+        ]
+    },
+    {
+        name: "suelo",
+        inherits: "block",
+        collision: {
+            "block": [
+                { "x": 0, "y": 0, "w": 0, "h": 0, "#tag": "collenemy" }
+            ]
+        }
+    },
+    {
+        name: "meta",
+        inherits: "block",
+        collision: {
+            "meta": [
+                { "x": 0, "y": 0, "w": 50, "h": 50, "#tag": "collenemy" }
+            ]
+        },
+        events: [
+            {
+                name: "#collide", code: function (event) {
+                this.engine.loadLevel(this.var.levelname);
+                }
+            }
+        ]
+    },
+    {
+        name: "lava",
+        inherits: "block",
+        collision: {
+            "lava": [
+                { "x": 0, "y": 0, "w": 0 , "h": 0, "#tag": "collenemy"},
+            ]
+        },
+           events: [
+            {
+                name: "#collide", code: function (event) {
+                // this.engine.debug.log(this.engine.var["#currentLevel"])
+                // this.engine.debug.log(this.engine.loadLevelByIndex.toString())
+                this.engine.loadLevelByIndex(this.engine.var["#currentLevel"]);
+                }
+            }
+        ]
+    }, 
+    {
+        name: "enemy",
+        events: [
+            {
+                name: "#setup", code: function (event) {
+                    this.setCollider("collenemy", { "x": 0, "y": 0, "w": this.var.w, "h": this.var.h });
+                    this.setCollider("collplayer", { "x": 0, "y": 0, "w": this.var.w, "h": this.var.h });
+                }
+            },
+            {
+                name: "#loop", code: function (event) {
+                    this.var.$x += this.var.speed;
+                    this.var.$y += this.var.dir;
+                }
+            },
+            {
+                name: "#collide", code: function (event) {
+                    this.var.$x -= this.var.speed;
+                    this.var.$y -= this.var.speed * this.var.dir;
+                    this.var.speed = -this.var.speed;
+                    this.var.dir = -this.var.dir
+
                 }
             }
         ],
 
         collision: {
-            "player": [
-                { "x": 0, "y": 0, "w": 50, "h": 50, "#tag": "playerCollision" },
+            "enemy1": [
+                { "x": 0, "y": 0, "w": 16 , "h": 16, "#tag": "collenemy"}
+            ],
+              "enemy2": [
+                { "x": 0, "y": 0, "w": 16 , "h": 16, "#tag": "collplayer"}
             ]
+
         }
     },
-
-
     {
-        name: "block",
-        sprite: "block",
+        name: "enemyshooter",
+        inherits: "enemy",
         events: [
-            {
-                name: "#setup", code: function(event){
-                    this.var.moveSpeed = 0; //velocidad a la que se moverá el jugador lateralmente
-                    this.var.jumpSpeed = 0; //velocidad con la que saltará el jugador
-                    this.var.vSpeed = 0; //velocidad vertical
-                    this.var.hSpeed = 0; //velocidad horizontal
-                    this.var.gravity = 0; //velocidad de la gravedad que afecta al jugador
-                    this.var.jumpEnable = false;
+           {
+                name: "#setup", code: function (event) {
+                    this.var.timer = 0;
+                    this.var.$x += this.var.speed;
+                    this.var.$y += this.var.dir;
                 }
             },
+            {
+                name: "#loop", code: function (event) {
+                    this.var.$x += this.var.speed;
+                    this.var.$y += this.var.dir;
+                    this.var.timer++;
+                    if (this.var.timer%this.var.cadency == 0) {
+                          var tiro = this.engine.spawn("tirito", this.var.disparete,
+                             {$x:this.var.$x+this.var.w/2, $y:this.var.$y+this.var.h/2,
+                             w:this.var.dispw, h:this.var.disph,
+                             dir:this.var.dispdir, speed:this.var.dispspeed})
+                    }
+                }
+            }
+        ]
+
+
+    },
+    {
+        name: "enemydisp",
+        inherits: "enemyshooter",
+        sprite: "enemydisp"
+    },
+    {
+        name: "disparo",
+        events: [
+            {
+                name: "#setup", code: function (event) {
+                   this.setCollider("collenemy", { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h});
+
+                }
+            },
+            {
+                name: "#loop", code: function (event) {
+                    this.var.$x += this.var.speed;
+                    this.var.$y += this.var.dir;
+                }
+            },
+            {
+                name: "#collide", code: function (event) {
+                    var explode = this.engine.spawn("explosion1", "explosion", {$x:this.var.$x, $y:this.var.$y})
+                    this.engine.destroy(this);
+                }
+            }
         ],
 
         collision: {
-            "block": [
-                { "x": 0, "y": 0, "w": 50, "h": 50, "#tag": "playerCollision" },
+             "bullet": [
+                { "x": 0, "y": 0, "w": 16 , "h": 16, "#tag": "collenemy"}
             ]
+            
         }
     },
 
@@ -303,11 +443,67 @@ CLOCKWORKRT.components.register([
         name: "background"
     },
 
-	{
+    {
         name: "background1",
         sprite: "background1",
         inherits: "background"
+    },
+    {
+        name: "disparo1",
+        inherits: "disparo",
+        sprite: "disparo1"
+    },
+    {
+        name: "enemy1",
+        inherits: "enemy",
+        sprite: "enemy1"
+    },
+    {
+        name: "enemy3",
+        inherits: "enemy",
+        sprite: "enemy3"
+    },
+    {
+        name: "enemy4",
+        inherits: "enemy",
+        sprite: "enemy4"
+    },
+    {
+        name: "enemy2",
+        inherits: "enemy",
+        sprite: "enemy2"
+    },
+    {
+        name: "textura1",
+        sprite: "textura1"
+    },
+     {
+        name: "pinchos",
+        sprite: "pinchos"
+    }, {
+        name: "metatest",
+        sprite: "metatest"
+    },
+   {
+        name: "explosion",
+        sprite: "explosion",
+        events: [
+            {
+                name: "#setup", code: function (event) {
+                    this.var.timer = 0;
+                }
+            },
+            {
+                name: "#loop", code: function (event) {
+                    this.var.timer++;
+                    if (this.var.timer == 30) {
+                        this.engine.destroy(this);
+                    }
+                }
+            }
+        ]
     }
+
 
 ])
 
