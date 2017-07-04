@@ -27,15 +27,15 @@ CLOCKWORKRT.components.register([
             },
             {
                 name: "#loop", code: function (event){
-                    /*
+                    
                     var collider = null;
                     var arrayCollisions = this.engine.collisionQuery("player", {"x": this.var.$x + this.var.hSpeed, 
                         "y": this.var.$y + this.var.vSpeed, "w": this.var.w + this.var.hSpeed,
                          "h": this.var.h + this.var.vSpeed});
-                    if(arrayCollisions != null){
+                    if(arrayCollisions.length != 0){
                         arrayCollisions = this.engine.collisionQuery("player", {"x": this.var.$x + this.var.hSpeed, 
                         "y": this.var.$y, "w": this.var.w + this.var.hSpeed,"h": this.var.h});
-                        if(arrayCollisions != null){//colisionaremos lateralmente con algo
+                        if(arrayCollisions.length != 0){//colisionaremos lateralmente con algo
                             collider = arrayCollisions[0];
                             if(this.var.hSpeed > 0)
                                 this.var.$x = collider.var.$x - this.var.w;
@@ -44,7 +44,7 @@ CLOCKWORKRT.components.register([
                         }
                         arrayCollisions = this.engine.collisionQuery("player", {"x": this.var.$x, 
                         "y": this.var.$y + this.var.vSpeed, "w": this.var.w, "h": this.var.h + this.var.vSpeed});
-                        if(arrayCollisions != null){//colisionamos verticalmente con algo
+                        if(arrayCollisions.length != 0){//colisionamos verticalmente con algo
                             collider = arrayCollisions[0];
                             if(this.var.vSpeed < 0)
                                 this.var.$y = collider.var.$y + collider.var.h;
@@ -52,7 +52,6 @@ CLOCKWORKRT.components.register([
                                 this.var.$y = collider.var.$y + this.var.h;
                         }
                     }
-                    */
 
                     if(this.var.keyboardRight && !this.var.keyboardLeft)//nos movemos a la derecha
                         this.var.hSpeed = this.var.moveSpeed;
