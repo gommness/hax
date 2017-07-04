@@ -173,14 +173,14 @@ CLOCKWORKRT.components.register([
     },
 
 
-    {
+   /* {
         name: "block",
         events: [
             {
                 name: "#setup", code: function (event) {
                     for(var i=0; i < this.var.w; i++)
                          for(var j=0; j < this.var.h; j++)
-                            var texture= this.engine.spawn(this.var.texture, "component", {$x:i*32+this.var.$x, $y:j*32+this.var.$y});
+                            var texture= this.engine.spawn("textura", this.var.texture, {$x:i*32+this.var.$x, $y:j*32+this.var.$y});
                 }
             }
         ]
@@ -202,32 +202,40 @@ CLOCKWORKRT.components.register([
                 { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h },
             ]
         }
-    },
+    }, */
     {
         name: "enemy",
         events: [
             {
                 name: "#setup", code: function (event) {
-                   this.var.vx = this.var.speed;
-                   this.var.vy = this.var.speed * this.var.dir;
+                   this.setCollider("collenemy", { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h});
+                   this.setCollider("collplayer", { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h});
                 }
             },
             {
                 name: "#loop", code: function (event) {
-                    this.var.$x += this.var.vx;
-                    this.var.$y += this.var.vy; 
+                    this.var.$x += this.var.speed;
+                    this.var.$y += this.var.dir; 
                 }
             },
             {
                 name: "#collide", code: function (event) {
+                    this.var.$x -=  this.var.speed;
+                    this.var.$y -= this.var.speed * this.var.dir;
+                    this.var.speed = -this.var.speed;
                     this.var.dir = -this.var.dir
+                   
                 }
             }
         ],
         collision: {
-            "damageblock": [
-                { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h },
+            "block": [
+                { "x": 0, "y": 0, "w": 16 , "h": 16, "#tag": "collenemy"}
+            ],
+              "player": [
+                { "x": 0, "y": 0, "w": 16 , "h": 16, "#tag": "collplayer"}
             ]
+
         }
     },
     {
@@ -235,43 +243,77 @@ CLOCKWORKRT.components.register([
         events: [
             {
                 name: "#setup", code: function (event) {
-                   this.var.vx = this.var.speed;
-                   this.var.vy = this.var.speed * this.var.dir;
+                   this.setCollider("collenemy", { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h});
+                   this.setCollider("collplayer", { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h});
+                   
                 }
             },
             {
                 name: "#loop", code: function (event) {
-                    this.var.$x += this.var.vx;
-                    this.var.$y += this.var.vy; 
+                    this.var.$x += this.var.speed;
+                    this.var.$y += this.var.dir; 
                 }
             },
             {
                 name: "#collide", code: function (event) {
-                    var explode = this.engine.spawn("explosion", "component", {$x:0, $y:0})
-                    this.destroy
+                    var explode = this.engine.spawn("explosion1", "explosion", {$x:this.var.$x, $y:this.var.$y})
+                    this.engine.destroy(this);
                 }
             }
         ],
         collision: {
-            "damageblock": [
-                { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h },
+             "block": [
+                { "x": 0, "y": 0, "w": 16 , "h": 16, "#tag": "collenemy"}
+            ],
+              "player": [
+                { "x": 0, "y": 0, "w": 16 , "h": 16, "#tag": "collplayer"}
             ]
         }
-    },
-    {
-        name: "texture1",
-        sprite: "suelo1"
-    },
-    {
-        name: "enemy1",
-        inherits: "enemy",
-        sprite: "enemigo1"
     },
     {
         name: "disparo1",
         inherits: "disparo",
         sprite: "disparo1"
     },
+    {
+        name: "enemy1",
+        inherits: "enemy",
+        sprite: "enemy1"
+    },
+    {
+        name: "enemy3",
+        inherits: "enemy",
+        sprite: "enemy3"
+    },
+    {
+        name: "enemy4",
+        inherits: "enemy",
+        sprite: "enemy4"
+    },
+    {
+        name: "enemy2",
+        inherits: "enemy",
+        sprite: "enemy2"
+    },
+   {
+        name: "explosion",
+        sprite: "explosion",
+        events: [
+            {
+                name: "#setup", code: function (event) {
+                    this.var.timer = 0;
+                }
+            },
+            {
+                name: "#loop", code: function (event) {
+                    this.var.timer++;
+                    if (this.var.timer == 30) {
+                        this.engine.destroy(this);
+                    }
+                }
+            }
+        ]
+    }
 	
 
 ])

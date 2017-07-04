@@ -28,9 +28,6 @@ CLOCKWORKRT.collisions.register([
         shape1: "player",
         shape2: "block",
         detector: function (player, block) {
-            // if ((player.x + player.w >= block.x && player.x + player.w <= block.x + block.w && player.y + player.h >= block.y && player.y + player.h <= block.y + block.h) ||
-            //     (player.x >= block.x && player.x <= block.x + block.w && player.y + player.h >= block.y && player.y + player.h <= )
-            // {
             if ( 
                 ((player.x >= block.x && player.x <= block.x + block.w) || (player.x + player.w >= block.x && player.x + player.w <= block.x + block.w)) &&
                 ((player.y >= block.y && player.y <= block.y + block.h) || (player.y + player.h >= block.y && player.y + player.h <= block.y + block.h))
@@ -40,12 +37,12 @@ CLOCKWORKRT.collisions.register([
                 return false;
             }
         }
-    },
+    }
 
 
 
     
-{
+    /*{
         shape1: "player",
         shape2: "block",
         detector: function (player, bloque) {
@@ -72,7 +69,7 @@ CLOCKWORKRT.collisions.register([
         detector: function (player, disparo) {
            //codigo de suso
         }
-    },
+    },*/
 	
 
 
