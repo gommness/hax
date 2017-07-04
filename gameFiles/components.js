@@ -34,6 +34,14 @@ CLOCKWORKRT.components.register([
                     this.var.keyboardLeft = false;
                     this.var.keyboardJump = false;
 
+                    this.var.lookingRight = true;
+                    this.var.lookingLeft = false;
+                    this.var.jumpingUp = false;
+                    this.var.jumpingDown = false;
+                    this.var.running = false;
+
+                    this.var.$state = "quietoDcha";
+
                     this.engine.var.$cameraX = 0;
                     this.engine.var.$cameraY = 0;
                     this.var.cameraY = 0;
@@ -55,22 +63,36 @@ CLOCKWORKRT.components.register([
                         "y": this.var.$y + 1, "w": w, "h": h
                     }).length != 0);
 
-                    if (this.var.keyboardRight && !this.var.keyboardLeft)//nos movemos a la derecha
+                    if (this.var.keyboardRight && !this.var.keyboardLeft) { //nos movemos a la derecha
                         this.var.hSpeed = this.var.moveSpeed;
-                    else if (!this.var.keyboardRight && this.var.keyboardLeft)//nos movemos a la izquierda
+                        this.var.lookingRight = true;
+                        this.var.lookingLeft = false;
+                    }
+                    else if (!this.var.keyboardRight && this.var.keyboardLeft) { //nos movemos a la izquierda
                         this.var.hSpeed = -this.var.moveSpeed;
-                    else
+                        this.var.lookingLeft = true;
+                        this.var.lookingRight = false;
+                    }
+                    else {
                         this.var.hSpeed = 0;
-
-
+                        this.var.running = false;
+                    }
+                    
                     this.var.vSpeed += this.var.gravity;
-                    if (this.var.vSpeed >= this.var.vLimit)
+                    if (this.var.vSpeed >= this.var.vLimit) {
                         this.var.vSpeed = this.var.vLimit;
+                        this.var.jumpingDown = true;
+                        this.var.jumpingUp = false;
+                    }
                     //JUMPING
                     if (this.var.onFloor == true) {
+                        this.var.jumpingUp = false;
+                        this.var.jumpingDown = false;
                         //TODO comprobar, para el salto normal, que haya colision con suelo debajo del jugador
                         this.var.jumpEnable = true;
                         if (this.var.keyboardJump) {
+                            this.var.jumpingDown = false;
+                            this.var.jumpingUp = true;
                             this.var.vSpeed = -this.var.jumpSpeed;//doble salto
                             this.var.keyboardJump = false;
                         }
@@ -79,10 +101,14 @@ CLOCKWORKRT.components.register([
                         "y": this.var.$y, "w": w, "h": h}).length != 0)) ||
                         (this.var.keyboardRight && (this.engine.collisionQuery("player", {"x": this.var.$x - 24,
                         "y": this.var.$y, "w": w, "h": h}).length != 0))){
+                            this.var.jumpingDown = false;
+                            this.var.jumpingUp = true;
                             this.var.vSpeed = -this.var.jumpSpeed;
                             this.var.keyboardJump = false;
                         }
                         else if(this.var.jumpEnable == true){
+                            this.var.jumpingDown = false;
+                            this.var.jumpingUp = true;
                             this.var.vSpeed = -this.var.jumpSpeed;//doble salto
                             this.var.keyboardJump = false;
                             this.var.jumpEnable = false;
@@ -136,6 +162,8 @@ CLOCKWORKRT.components.register([
                                     this.var.vSpeed += aux;
                                 }
                                 this.var.$y += this.var.vSpeed - aux;
+                                if(this.var.vspeed > 0)
+                                    var humos = this.engine.spawn("humosCaida", "humos", {$x:this.var.$x, $y:this.var.$y});
                                 this.var.vSpeed = 0;
                             }
                         } else {
@@ -150,8 +178,8 @@ CLOCKWORKRT.components.register([
                         this.var.$y = 0;
                     }
 
-                    var tentativeCameraY = this.var.$y - cam_limit_up;
                     //Movemos la camara
+                    var tentativeCameraY = this.var.$y - cam_limit_up;
                     if (tentativeCameraY >= cam_limit_down) {
                         this.engine.var.$cameraY = cam_limit_down;
                     } else if (tentativeCameraY <= 0) {
@@ -159,6 +187,48 @@ CLOCKWORKRT.components.register([
                     } else {
                         this.engine.var.$cameraY = tentativeCameraY;
                     }
+
+                    //Pintamos el player
+
+                    if (this.var.vSpeed <= 0) {
+                        this.jumpingUp = true;
+                        this.jumpingDown = false;
+                    } else {
+                        this.jumpingUp = false;
+                        this.jumpingDown = true;
+                    }
+
+                    if (this.var.hSpeed < 0) {
+                        this.var.lookingLeft = true;
+                        this.var.lookingRight = false;
+                        this.var.running = true;
+                    } else if (this.var.hSpeed > 0){
+                        this.var.lookingRight = true;
+                        this.var.lookingLeft = false;
+                        this.var.running = true;
+                    } else {
+                        this.var.running = false;
+                    }
+
+                    if (this.var.jumpingUp && this.var.lookingLeft) {
+                        this.var.$state = "saltoIzdaUp";
+                    } else if (this.var.jumpingUp && this.var.lookingRight) {
+                        this.var.$state = "saltoDchaUp";
+                    } else if (this.var.jumpingDown && this.var.lookingLeft) {
+                        this.var.$state = "saltoIzdaDown";
+                    } else if (this.var.jumpingDown && this.var.lookingRight) {
+                        this.var.$state = "saltoDchaDown";
+                    } else if (this.var.running && this.var.lookingRight) {
+                        this.var.$state = "correDcha";
+                    } else if (this.var.running && this.var.lookingLeft) {
+                        this.var.$state = "correIzda";
+                    } else if (this.var.lookingRight) {
+                        this.var.$state = "quietoDcha";
+                    } else if (this.var.lookingLeft) {
+                        this.var.$state = "quietoIzda";
+                    } else {
+                        this.var.$state = "quietoDcha";
+                    } 
                 }
             },
             {
@@ -445,19 +515,40 @@ CLOCKWORKRT.components.register([
     },
 
     {
-        name: "background"
+        name: "background1",
+        sprite: "background1"
     },
 
     {
-        name: "background1",
-        sprite: "background1",
-        inherits: "background"
+        name: "background2",
+        sprite: "background2"
     },
     {
         name: "disparo1",
         inherits: "disparo",
         sprite: "disparo1"
     },
+
+    {
+        name: "humos",
+        sprite: "humos",
+        events: [
+            {
+                name: "#setUp", code: function(event) {
+                    this.var.timer = 30;
+                }
+            },
+            {
+                name: "#loop", code: function(event) {
+                    this.var.timer--;
+                    if (this.var.timer == 0) {
+                        this.engine.destroy(this);
+                    }
+                }
+            }
+        ]
+    },
+
     {
         name: "enemy1",
         inherits: "enemy",
@@ -487,6 +578,70 @@ CLOCKWORKRT.components.register([
         name: "textura1",
         sprite: "textura1"
     },
+        {
+        name: "textura1_1",
+        sprite: "textura1_1"
+    },
+        {
+        name: "textura1_2",
+        sprite: "textura1_2"
+    },
+        {
+        name: "textura1_3",
+        sprite: "textura1_3"
+    },
+        {
+        name: "textura1_4",
+        sprite: "textura1_4"
+    },
+        {
+        name: "textura1_5",
+        sprite: "textura1_5"
+    },
+        {
+        name: "textura1_6",
+        sprite: "textura1_6"
+    },
+        {
+        name: "textura1_7",
+        sprite: "textura1_7"
+    },
+        {
+        name: "textura1_8",
+        sprite: "textura1_8"
+    },
+        {
+        name: "textura1_9",
+        sprite: "textura1_9"
+    },
+        {
+        name: "textura1_10",
+        sprite: "textura1_10"
+    },
+        {
+        name: "textura1_11",
+        sprite: "textura1_11"
+    },
+        {
+        name: "textura1_12",
+        sprite: "textura1_12"
+    },
+        {
+        name: "textura1_13",
+        sprite: "textura1_13"
+    },
+        {
+        name: "textura1_14",
+        sprite: "textura1_14"
+    },
+        {
+        name: "textura1_15",
+        sprite: "textura1_15"
+    },
+        {
+        name: "textura1_16",
+        sprite: "textura1_16"
+    },
      {
         name: "pinchos",
         sprite: "pinchos"
@@ -495,8 +650,8 @@ CLOCKWORKRT.components.register([
         name: "pinchosh",
         sprite: "pinchosh"
     }, {
-        name: "metatest",
-        sprite: "metatest"
+        name: "metasprite",
+        sprite: "meta"
     },
    {
         name: "explosion",
