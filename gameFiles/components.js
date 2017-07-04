@@ -301,16 +301,40 @@ CLOCKWORKRT.components.register([
             ]
         }
     },
-    /*
+    {
+        name: "meta",
+        inherits: "block",
+        collision: {
+            "meta": [
+                { "x": 0, "y": 0, "w": 50, "h": 50, "#tag": "collenemy" }
+            ]
+        },
+        events: [
+            {
+                name: "#collide", code: function (event) {
+                this.engine.loadLevel(this.var.levelname);
+                }
+            }
+        ]
+    },
     {
         name: "lava",
         inherits: "block",
         collision: {
-            "damageblock": [
-                { "x": 0, "y": 0, "w": this.var.w , "h": this.var.h },
+            "lava": [
+                { "x": 0, "y": 0, "w": 0 , "h": 0, "#tag": "collenemy"},
             ]
-        }
-    }, */
+        },
+           events: [
+            {
+                name: "#collide", code: function (event) {
+                // this.engine.debug.log(this.engine.var["#currentLevel"])
+                // this.engine.debug.log(this.engine.loadLevelByIndex.toString())
+                this.engine.loadLevelByIndex(this.engine.var["#currentLevel"]);
+                }
+            }
+        ]
+    }, 
     {
         name: "enemy",
         events: [
@@ -448,7 +472,13 @@ CLOCKWORKRT.components.register([
     {
         name: "textura1",
         sprite: "textura1"
-
+    },
+     {
+        name: "pinchos",
+        sprite: "pinchos"
+    }, {
+        name: "metatest",
+        sprite: "metatest"
     },
    {
         name: "explosion",

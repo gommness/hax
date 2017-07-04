@@ -10,7 +10,9 @@
     <object name="fondo1" type="background1" x="0" y="0"></object>
     
     <object name="suelo1" type="suelo" x="250" y="250" vars='{"w": 100,"h": 50, "textura": "textura1"}'></object>
-    
+    <object name="meta1" type="meta" x="0" y="300" vars='{"w": 50,"h": 50, "textura": "metatest", "levelname": "level2"}'></object>
+    <object name="pinchos1" type="lava" x="350" y="150" vars='{"w": 50,"h": 150, "textura": "pinchos"}'></object>
+  
     <object name= "e1" type="enemy1" x="0" y="0" vars='{"w": 16,"h": 16, "dir": 3, "speed": 3}'></object>
     <object name= "e2" type="enemy2" x="0" y="700" vars='{"w": 16,"h": 16, "dir": -3, "speed": 3}'></object>
 
@@ -20,8 +22,29 @@
     <object name= "d1" type="disparo1" x="200" y="450" vars='{"w": 12,"h": 12, "dir": 0, "speed": 3}'></object>
     <object name= "edisp" type="enemydisp" x="500" y="500" vars='{"w": 50,"h": 50, "dir": 0, "speed": 1, "dispdir": -6, "dispspeed": -6, "dispw": 12, "disph": 12, "cadency": 25, "disparete": "disparo1"}'></object>
 
+  </level>
+
+
+  <level id="level2">
+    <object name="keyboard" type="keyboard" x="0" y="0" ></object>
+    <object name="gamepad" type="gamepad" x="0" y="0" ></object>
+    
+    <object name="player" type="player" x="250" y="200"></object>
+    
+    <object name="suelo1" type="suelo" x="250" y="250" vars='{"w": 300,"h": 50, "textura": "textura1"}'></object>
+    <object name="meta1" type="meta" x="0" y="300" vars='{"w": 50,"h": 50, "textura": "metatest", "levelname": "level2"}'></object>
+    <object name="pinchos1" type="pinchos" x="250" y="250" vars='{"w": 50,"h": 150, "textura": "pinchos"}'></object>
+    
+
+    <object name= "e3" type="enemy3" x="400" y="300" vars='{"w": 32,"h": 32, "dir": 0, "speed": 0}'></object> 
+    <object name= "e4" type="enemy4" x="900" y="450" vars='{"w": 32,"h": 32, "dir": 0, "speed": -4.8}'></object>
+
+    <object name= "d1" type="disparo1" x="200" y="450" vars='{"w": 12,"h": 12, "dir": 0, "speed": 3}'></object>
+    <object name= "edisp" type="enemydisp" x="500" y="500" vars='{"w": 50,"h": 50, "dir": 0, "speed": 1, "dispdir": -6, "dispspeed": -6, "dispw": 12, "disph": 12, "cadency": 25, "disparete": "disparo1"}'></object>
 
   </level>
+
+
 </levels>
 
 
