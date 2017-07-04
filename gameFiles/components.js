@@ -3,8 +3,8 @@ var vk_up = 1;
 var vk_right = 2;
 var vk_down = 3;
 var vk_left = 4;
-var resolution_height = 768;
-var level_height = 2208;
+var resolution_height = 750;
+var level_height = 3600;
 var cam_limit_down = level_height - resolution_height;
 var cam_limit_up = Math.floor(resolution_height / 2);
 var w = 50;
@@ -22,6 +22,11 @@ CLOCKWORKRT.components.register([
     {
         name: "player",
         sprite: "player",
+        collision: {
+            "player": [
+                { "x": 0, "y": 0, "w": 50, "h": 50, "#tag": "collplayer" }
+            ]
+        },
         events: [
             {
                 name: "#setup", code: function (event) {
@@ -33,12 +38,12 @@ CLOCKWORKRT.components.register([
                     this.engine.var.$cameraY = 0;
                     this.var.cameraY = 0;
 
-                    this.var.moveSpeed = 4; //velocidad a la que se moverá el jugador lateralmente
-                    this.var.jumpSpeed = 20; //velocidad con la que saltará el jugador
+                    this.var.moveSpeed = 12; //velocidad a la que se moverá el jugador lateralmente
+                    this.var.jumpSpeed = 24; //velocidad con la que saltará el jugador
                     this.var.vLimit = 30;
                     this.var.vSpeed = 0; //velocidad vertical
-                    this.var.hSpeed = 4; //velocidad horizontal
-                    this.var.gravity = 1; //velocidad de la gravedad que afecta al jugador
+                    this.var.hSpeed = 0; //velocidad horizontal
+                    this.var.gravity = 2; //velocidad de la gravedad que afecta al jugador
                     this.var.jumpEnable = true;
                     this.var.onFloor = false;
                 }
@@ -69,10 +74,19 @@ CLOCKWORKRT.components.register([
                             this.var.vSpeed = -this.var.jumpSpeed;//doble salto
                             this.var.keyboardJump = false;
                         }
-                    } else if (this.var.jumpEnable == true && this.var.keyboardJump) {
-                        this.var.vSpeed = -this.var.jumpSpeed;//doble salto
-                        this.var.keyboardJump = false;
-                        this.var.jumpEnable = false;
+                    } else if (this.var.keyboardJump) {
+                        if((this.var.keyboardLeft && (this.engine.collisionQuery("player", {"x": this.var.$x + 24,
+                        "y": this.var.$y, "w": w, "h": h}).length != 0)) ||
+                        (this.var.keyboardRight && (this.engine.collisionQuery("player", {"x": this.var.$x - 24,
+                        "y": this.var.$y, "w": w, "h": h}).length != 0))){
+                            this.var.vSpeed = -this.var.jumpSpeed;
+                            this.var.keyboardJump = false;
+                        }
+                        else if(this.var.jumpEnable == true){
+                            this.var.vSpeed = -this.var.jumpSpeed;//doble salto
+                            this.var.keyboardJump = false;
+                            this.var.jumpEnable = false;
+                        }
                     }
 
                     var collider = null;
@@ -145,14 +159,6 @@ CLOCKWORKRT.components.register([
                     } else {
                         this.engine.var.$cameraY = tentativeCameraY;
                     }
-
-
-                    /*
-                    TODO:
-                        si no estoy de pie en un solido, vspeed += gravity
-                        si en x+hspeed o y+vspeed hay una colision con un solido
-                        me snappeo al grid mas cercano
-                    */
                 }
             },
             {
@@ -268,12 +274,10 @@ CLOCKWORKRT.components.register([
             },
             {
                 name: "#collide", code: function (event) {
-                    /*
-                    this.var.$x -= this.var.hSpeed;
-                    this.var.$y -= this.var.vSpeed;
-                    this.var.keyboardLeft = false;
-                    this.var.keyboardRight = false;
-                    */
+                    if(event.shape2kind == "enemy1"){
+                        this.engine.debug.log("colision con enemy1: " + this.engine.var['#currentLevel']);
+                        this.engine.loadLevelByIndex(this.engine.var['#currentLevel']);
+                    }
                 }
             }
         ]
