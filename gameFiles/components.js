@@ -26,16 +26,19 @@ CLOCKWORKRT.components.register([
                     this.var.keyboardJump = false;
 
                     this.var.moveSpeed = 4; //velocidad a la que se moverá el jugador lateralmente
-                    this.var.jumpSpeed = 30; //velocidad con la que saltará el jugador
-                    this.var.vLimit = 40;
+                    this.var.jumpSpeed = 20; //velocidad con la que saltará el jugador
+                    this.var.vLimit = 30;
                     this.var.vSpeed = 0; //velocidad vertical
                     this.var.hSpeed = 4; //velocidad horizontal
                     this.var.gravity = 1; //velocidad de la gravedad que afecta al jugador
                     this.var.jumpEnable = true;
+                    this.var.onFloor = false;
                 }
             },
             {
                 name: "#loop", code: function (event){
+                    this.var.onFloor = (this.engine.collisionQuery("player", {"x": this.var.$x, 
+                        "y": this.var.$y + 1, "w": w, "h": h}).length != 0);
 
                     if(this.var.keyboardRight && !this.var.keyboardLeft)//nos movemos a la derecha
                         this.var.hSpeed = this.var.moveSpeed;
@@ -48,12 +51,18 @@ CLOCKWORKRT.components.register([
                     this.var.vSpeed += this.var.gravity;
                     if(this.var.vSpeed >= this.var.vLimit)
                         this.var.vSpeed = this.var.vLimit;
-                    if(this.var.keyboardJump == true){
+                    //JUMPING
+                    if(this.var.onFloor == true){
                         //TODO comprobar, para el salto normal, que haya colision con suelo debajo del jugador
-                        if(this.var.jumpEnable == true){
+                        this.var.jumpEnable = true;
+                        if(this.var.keyboardJump){
                             this.var.vSpeed = -this.var.jumpSpeed;//doble salto
                             this.var.keyboardJump = false;
                         }
+                    } else if(this.var.jumpEnable == true && this.var.keyboardJump){
+                        this.var.vSpeed = -this.var.jumpSpeed;//doble salto
+                        this.var.keyboardJump = false;
+                        this.var.jumpEnable = false;
                     }
 
                     var collider = null;
