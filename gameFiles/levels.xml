@@ -6,6 +6,7 @@
     <object name="keyboard" type="keyboard" x="0" y="0" ></object>
     <object name="gamepad" type="gamepad" x="0" y="0" ></object>
     <object name="player" type="player" x="100" y="100"></object>
+    <object name="block2" type="block" x="300" y="200"></object>
     <object name="block1" type="block" x="500" y="100"></object>
     <object name="fondo1" type="background1" x="0" y="0"></object>
   </level>

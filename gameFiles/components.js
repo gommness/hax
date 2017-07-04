@@ -7,6 +7,16 @@ var resolution_height = 768;
 var level_height = 2208;
 var cam_limit_down = level_height - resolution_height;
 var cam_limit_up = Math.floor(resolution_height/2);
+var w = 50;
+var h = 50;
+
+function checkCollision(x1,y1,w1,h1, x2,y2,w2,h2){
+    return( 
+            ((x1 >= x2 && x1 <= x2 + w2) || (x1 + w1 >= x2 && x1 + w1 <= x2 + w2)) &&
+            ((y1 >= y2 && y1 <= y2 + h2) || (y1 + h1 >= y2 && y1 + h1 <= y2 + h2))
+        );
+}
+
 
 CLOCKWORKRT.components.register([
     {
@@ -24,42 +34,19 @@ CLOCKWORKRT.components.register([
                     this.var.cameraY = 0;
 
                     this.var.moveSpeed = 4; //velocidad a la que se moverá el jugador lateralmente
-                    this.var.jumpSpeed = 30; //velocidad con la que saltará el jugador
-                    this.var.vLimit = 40;
+                    this.var.jumpSpeed = 20; //velocidad con la que saltará el jugador
+                    this.var.vLimit = 30;
                     this.var.vSpeed = 0; //velocidad vertical
-                    this.var.hSpeed = 0; //velocidad horizontal
+                    this.var.hSpeed = 4; //velocidad horizontal
                     this.var.gravity = 1; //velocidad de la gravedad que afecta al jugador
                     this.var.jumpEnable = true;
+                    this.var.onFloor = false;
                 }
             },
             {
                 name: "#loop", code: function (event){
-                    /*
-                    var collider = null;
-                    var arrayCollisions = this.engine.collisionQuery("player", {"x": this.var.$x + this.var.hSpeed, 
-                        "y": this.var.$y + this.var.vSpeed, "w": this.var.w + this.var.hSpeed,
-                         "h": this.var.h + this.var.vSpeed});
-                    if(arrayCollisions != null){
-                        arrayCollisions = this.engine.collisionQuery("player", {"x": this.var.$x + this.var.hSpeed, 
-                        "y": this.var.$y, "w": this.var.w + this.var.hSpeed,"h": this.var.h});
-                        if(arrayCollisions != null){//colisionaremos lateralmente con algo
-                            collider = arrayCollisions[0];
-                            if(this.var.hSpeed > 0)
-                                this.var.$x = collider.var.$x - this.var.w;
-                            else
-                                this.var.$x = collider.var.$x - collider.var.w;
-                        }
-                        arrayCollisions = this.engine.collisionQuery("player", {"x": this.var.$x, 
-                        "y": this.var.$y + this.var.vSpeed, "w": this.var.w, "h": this.var.h + this.var.vSpeed});
-                        if(arrayCollisions != null){//colisionamos verticalmente con algo
-                            collider = arrayCollisions[0];
-                            if(this.var.vSpeed < 0)
-                                this.var.$y = collider.var.$y + collider.var.h;
-                            else
-                                this.var.$y = collider.var.$y + this.var.h;
-                        }
-                    }
-                    */
+                    this.var.onFloor = (this.engine.collisionQuery("player", {"x": this.var.$x, 
+                        "y": this.var.$y + 1, "w": w, "h": h}).length != 0);
 
                     if(this.var.keyboardRight && !this.var.keyboardLeft)//nos movemos a la derecha
                         this.var.hSpeed = this.var.moveSpeed;
@@ -72,15 +59,68 @@ CLOCKWORKRT.components.register([
                     this.var.vSpeed += this.var.gravity;
                     if(this.var.vSpeed >= this.var.vLimit)
                         this.var.vSpeed = this.var.vLimit;
-                    if(this.var.keyboardJump == true){
+                    //JUMPING
+                    if(this.var.onFloor == true){
                         //TODO comprobar, para el salto normal, que haya colision con suelo debajo del jugador
-                        if(this.var.jumpEnable == true){
+                        this.var.jumpEnable = true;
+                        if(this.var.keyboardJump){
                             this.var.vSpeed = -this.var.jumpSpeed;//doble salto
                             this.var.keyboardJump = false;
                         }
+                    } else if(this.var.jumpEnable == true && this.var.keyboardJump){
+                        this.var.vSpeed = -this.var.jumpSpeed;//doble salto
+                        this.var.keyboardJump = false;
+                        this.var.jumpEnable = false;
                     }
-                    this.var.$x += this.var.hSpeed;
-                    this.var.$y += this.var.vSpeed;
+
+                    var collider = null;
+                    var aux = 0;
+                    var arrayCollisions = this.engine.collisionQuery("player", {"x": this.var.$x + this.var.hSpeed, 
+                        "y": this.var.$y + this.var.vSpeed, "w": w, "h": h});
+                    this.engine.debug.log(JSON.stringify({"x": this.var.$x + this.var.hSpeed, 
+                        "y": this.var.$y + this.var.vSpeed, "w": w, "h": h}));
+                    this.engine.debug.log("collision length: " + arrayCollisions.length);
+                    //this.engine.debug.log("x: " + this.var.$x + " y: " + this.var.$y + " w: " + (this.var.$x+w) + " h: " + (this.var.$y+h));
+                    
+                    if(arrayCollisions.length != 0){
+                        arrayCollisions = this.engine.collisionQuery("player", {"x": this.var.$x + this.var.hSpeed, 
+                        "y": this.var.$y, "w":w,"h": h});
+                        if(arrayCollisions.length != 0){//colisionaremos lateralmente con algo
+                            this.engine.debug.log("COLISION HORIZONTAL");
+                            collider = arrayCollisions[0];
+                            aux = Math.sign(collider.var.$x - this.var.$x);
+                            this.var.hSpeed = aux;
+                            if(aux != 0){
+                                while(!checkCollision(this.var.$x + this.var.hSpeed,this.var.$y,w,h, collider.var.$x,collider.var.$y,w,h)){
+                                    this.var.hSpeed += aux;
+                                }
+                                this.var.$x += this.var.hSpeed - aux;
+                                this.var.hSpeed = 0;
+                            }
+                        } else {
+                            this.var.$x += this.var.hSpeed;
+                        }
+                        arrayCollisions = this.engine.collisionQuery("player", {"x": this.var.$x, 
+                        "y": this.var.$y + this.var.vSpeed, "w": w, "h": h});
+                        if(arrayCollisions.length != 0){//colisionamos verticalmente con algo
+                            this.engine.debug.log("COLISION VERTICAL");
+                            collider = arrayCollisions[0];
+                            aux = Math.sign(collider.var.$y - this.var.$y);
+                            this.var.vSpeed = aux;
+                            if(aux != 0){
+                                while(!checkCollision(this.var.$x,this.var.$y + this.var.vSpeed,w,h, collider.var.$x,collider.var.$y,w,h)){
+                                    this.var.vSpeed += aux;
+                                }
+                                this.var.$y += this.var.vSpeed - aux;
+                                this.var.vSpeed = 0;
+                            }
+                        } else {
+                            this.var.$y += this.var.vSpeed;
+                        }
+                    } else {
+                        this.var.$x += this.var.hSpeed;
+                        this.var.$y += this.var.vSpeed;
+                    }
                     if(this.var.$y >= level_height) {
                         this.var.cameraY = 0;
                         this.var.$y = 0;
@@ -135,12 +175,12 @@ CLOCKWORKRT.components.register([
                             this.var.vSpeed = Math.max(this.var.vSpeed, -0.25*this.var.jumpSpeed);//para detener el salto de forma mas organica
                         break;
                         case 2://vk_right
-                            //this.var.keyboardRight = true;
+                            this.var.keyboardRight = false;
                         break;
                         case 3://vk_down
                         break;
                         case 4://vk_left
-                            //this.var.keyboardLeft = true;
+                            this.var.keyboardLeft = false;
                         break;
                     }
                 }
@@ -160,12 +200,17 @@ CLOCKWORKRT.components.register([
             {
                 name: "gamepadAxis", code: function(event){
                     var xAxis = event.values[0].x;
-                    if(xAxis < -0.5)//le estamos dando a la izda
+                    if(xAxis < -0.5){//le estamos dando a la izda
                         this.do.vk_press(vk_left);
-                    else if(xAxis > 0.5)
+                        this.do.vk_release(vk_right);
+                    }
+                    else if(xAxis > 0.5){
                         this.do.vk_press(vk_right);
-                    else
+                        this.do.vk_release(vk_left);
+                    }
+                    else{
                         this.do.vk_press(vk_neutral);
+                    }
                 }
             },
             {
@@ -213,19 +258,19 @@ CLOCKWORKRT.components.register([
             },
             {
                 name: "#collide", code: function (event) {
-                    
+                    /*
                     this.var.$x -= this.var.hSpeed;
                     this.var.$y -= this.var.vSpeed;
                     this.var.keyboardLeft = false;
                     this.var.keyboardRight = false;
-
+                    */
                 }
             }
         ],
 
         collision: {
             "player": [
-                { "x": 0, "y": 0, "w": 100, "h": 100, "#tag": "playerCollision" },
+                { "x": 0, "y": 0, "w": 50, "h": 50, "#tag": "playerCollision" },
             ]
         }
     },
@@ -249,7 +294,7 @@ CLOCKWORKRT.components.register([
 
         collision: {
             "block": [
-                { "x": 0, "y": 0, "w": 100, "h": 100, "#tag": "playerCollision" },
+                { "x": 0, "y": 0, "w": 50, "h": 50, "#tag": "playerCollision" },
             ]
         }
     },

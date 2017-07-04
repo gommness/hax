@@ -1,7 +1,7 @@
 
 <?xml version="1.0" encoding="utf-8"?>
 <spritesheets>
-  <spritesheet name="player" src="images/spaceships.png">
+  <spritesheet name="player" src="images/spriteSheet.png">
     <!--PLAYER STATES-->
     <states>
       <state name="Idle">
@@ -16,7 +16,7 @@
     </layers>
     <!--PLAYER FRAMES-->
     <frames>
-      <frame name="Idle" x="0" y="0" w="100" h="100" t="100"></frame>
+      <frame name="Idle" x="0" y="0" w="50" h="50" t="100"></frame>
     </frames>
   </spritesheet>
 
@@ -35,7 +35,7 @@
     </layers>
     <!--PLAYER FRAMES-->
     <frames>
-      <frame name="Idle" x="0" y="0" w="100" h="100" t="100"></frame>
+      <frame name="Idle" x="50" y="50" w="50" h="50" t="100"></frame>
     </frames>
   </spritesheet>
 
