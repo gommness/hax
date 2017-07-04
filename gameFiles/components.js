@@ -121,20 +121,12 @@ CLOCKWORKRT.components.register([
                         "x": this.var.$x + this.var.hSpeed,
                         "y": this.var.$y + this.var.vSpeed, "w": w, "h": h
                     });
-                    this.engine.debug.log(JSON.stringify({
-                        "x": this.var.$x + this.var.hSpeed,
-                        "y": this.var.$y + this.var.vSpeed, "w": w, "h": h
-                    }));
-                    this.engine.debug.log("collision length: " + arrayCollisions.length);
-                    //this.engine.debug.log("x: " + this.var.$x + " y: " + this.var.$y + " w: " + (this.var.$x+w) + " h: " + (this.var.$y+h));
-
                     if (arrayCollisions.length != 0) {
                         arrayCollisions = this.engine.collisionQuery("player", {
                             "x": this.var.$x + this.var.hSpeed,
                             "y": this.var.$y, "w": w, "h": h
                         });
                         if (arrayCollisions.length != 0) {//colisionaremos lateralmente con algo
-                            this.engine.debug.log("COLISION HORIZONTAL");
                             collider = arrayCollisions[0];
                             aux = Math.sign(collider.var.$x - this.var.$x);
                             this.var.hSpeed = aux;
@@ -153,7 +145,6 @@ CLOCKWORKRT.components.register([
                             "y": this.var.$y + this.var.vSpeed, "w": w, "h": h
                         });
                         if (arrayCollisions.length != 0) {//colisionamos verticalmente con algo
-                            this.engine.debug.log("COLISION VERTICAL");
                             collider = arrayCollisions[0];
                             aux = Math.sign(collider.var.$y - this.var.$y);
                             this.var.vSpeed = aux;
@@ -306,7 +297,7 @@ CLOCKWORKRT.components.register([
                             this.do.vk_press(vk_left);
                             break;
                         case 38: //flecha arriba
-                            this.do.ck_press(vk_up);
+                            this.do.vk_press(vk_up);
                             break;
                         case 39: //flecha derecha
                             this.do.vk_press(vk_right);
@@ -345,7 +336,6 @@ CLOCKWORKRT.components.register([
             {
                 name: "#collide", code: function (event) {
                     if(event.shape2kind == "enemy1" || event.shape2kind == "bullet"){
-                        this.engine.debug.log("colision con enemy1: " + this.engine.var['#currentLevel']);
                         this.engine.loadLevelByIndex(this.engine.var['#currentLevel']);
                     }
                 }
@@ -402,8 +392,6 @@ CLOCKWORKRT.components.register([
            events: [
             {
                 name: "#collide", code: function (event) {
-                // this.engine.debug.log(this.engine.var["#currentLevel"])
-                // this.engine.debug.log(this.engine.loadLevelByIndex.toString())
                 this.engine.loadLevelByIndex(this.engine.var["#currentLevel"]);
                 }
             }

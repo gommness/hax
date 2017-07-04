@@ -65,7 +65,6 @@
     <object name="enemy7" type="platanin" x="399" y="2250" vars='{"w":50,"h":50,"dir":0,"speed":0,"dispspeed":17,"dispdir":0,"disparete":"disparo1","dispw":12,"disph":12,"cadency":90}'></object>
     <object name="pinchi2" type="lava" x="51" y="2050" vars='{"w": 50,"h": 200, "textura": "pinchos"}'></object>
     <object name="suelito" type="suelo" x="200" y="2600" vars='{"w": 200,"h": 50, "textura": "textura1"}'></object>
-    <object name="metaa" type="meta" x="850" y="100" vars='{"w": 50,"h": 50, "textura": "metatest", "levelname":"mainLevel"}'></object>
     <object name="enemy7" type="enemy3" x="400" y="100" vars='{"w":50,"h":50,"speed":0,"dir":15}'></object>
     <object name="enemy8" type="enemy3" x="450" y="125" vars='{"w":50,"h":50,"speed":0,"dir":15}'></object>
     <object name="enemy9" type="enemy3" x="500" y="150" vars='{"w":50,"h":50,"speed":0,"dir":15}'></object>
