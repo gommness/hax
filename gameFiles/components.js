@@ -80,7 +80,7 @@ CLOCKWORKRT.components.register([
             },
             {
                 name: "vk_release", code: function(event){
-                    this.engine.debug.log("release" + event);
+
                     switch(event){
                         case 0://vk_neutral
                             //this.var.keyboardRight = this.var.keyboardLeft = false;
