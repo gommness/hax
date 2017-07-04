@@ -8,6 +8,22 @@
     <object name="gamepad" type="gamepad" x="0" y="0" ></object>
     
     <object name="player" type="player" x="150" y="3470"></object>
+    <object name="enemy1" type="enemy3" x="400" y="3450" vars='{"w":50,"h":50,"speed":0,"dir":4}'></object>
+    <object name="enemy2" type="enemy3" x="700" y="3500" vars='{"w":50,"h":50,"speed":0,"dir":4}'></object>
+    <object name="enemy3" type="enemy3" x="1000" y="3300" vars='{"w":50,"h":50,"speed":0,"dir":4}'></object>
+    <object name="enemy4" type="elenemigo" x="150" y="3290" vars='{"w":50,"h":50,"speed":7,"dir":0}'></object>
+    <object name="enemy5" type="enemydisp" x="899" y="2800" vars='{"w":50,"h":50,"dir":0,"speed":0,"dispspeed":-14,"dispdir":6,"disparete":"disparo1","dispw":12,"disph":12,"cadency":35}'></object>
+    <object name="enemy6" type="enemy3" x="899" y="2400" vars='{"w":50,"h":50,"speed":-5,"dir":-5}'></object>
+    <object name="pinchi1" type="lava" x="605" y="2555" vars='{"w": 200,"h": 50, "textura": "pinchosh"}'></object>
+    <object name="enemy7" type="platanin" x="399" y="2250" vars='{"w":50,"h":50,"dir":0,"speed":0,"dispspeed":17,"dispdir":0,"disparete":"disparo1","dispw":12,"disph":12,"cadency":90}'></object>
+    <object name="pinchi2" type="lava" x="51" y="2050" vars='{"w": 50,"h": 200, "textura": "pinchos"}'></object>
+    <object name="suelito" type="suelo" x="200" y="2600" vars='{"w": 200,"h": 50, "textura": "textura1"}'></object>
+    <object name="metaa" type="meta" x="850" y="100" vars='{"w": 50,"h": 50, "textura": "metatest", "levelname":"mainLevel"}'></object>
+    <object name="enemy7" type="enemy3" x="400" y="100" vars='{"w":50,"h":50,"speed":0,"dir":15}'></object>
+    <object name="enemy8" type="enemy3" x="450" y="125" vars='{"w":50,"h":50,"speed":0,"dir":15}'></object>
+    <object name="enemy9" type="enemy3" x="500" y="150" vars='{"w":50,"h":50,"speed":0,"dir":15}'></object>
+  
+
 
     <object name="paredI" type="suelo" x="0" y="0" vars='{"w": 50,"h": 3600, "textura": "textura1"}'></object>
     <object name="paredD" type="suelo" x="1150" y="0" vars='{"w": 50,"h": 3600, "textura": "textura1"}'></object>

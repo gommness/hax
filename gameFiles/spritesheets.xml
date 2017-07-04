@@ -124,6 +124,24 @@
     </frames>
   </spritesheet>
 
+    <spritesheet name="platanin" src="images/platanin.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+        <frame name="E2"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="0" y="0" w="50" h="50" t="500"></frame>
+      <frame name="E2" x="50" y="0" w="50" h="50" t="500"></frame>
+    </frames>
+  </spritesheet>
+
   <spritesheet name="enemy4" src="images/enemy4.png">
     <states>
       <state name="E1">
@@ -139,6 +157,24 @@
     <frames>
       <frame name="E1" x="0" y="0" w="50" h="50" t="600"></frame>
       <frame name="E2" x="50" y="0" w="50" h="50" t="600"></frame>
+    </frames>
+  </spritesheet>
+
+   <spritesheet name="elenemigo" src="images/elenemigo.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+        <frame name="E2"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="0" y="0" w="50" h="50" t="500"></frame>
+      <frame name="E2" x="50" y="0" w="50" h="50" t="500"></frame>
     </frames>
   </spritesheet>
 
@@ -195,6 +231,22 @@
   </spritesheet>
 
   <spritesheet name="pinchos" src="images/pinchos.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="0" y="0" w="50" h="50" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+  <spritesheet name="pinchosh" src="images/pinchosh.png">
     <states>
       <state name="E1">
         <layer name="E1"></layer>

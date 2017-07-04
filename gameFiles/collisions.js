@@ -54,7 +54,7 @@ CLOCKWORKRT.collisions.register([
         }
     },
      {
-        shape1: "enemy2",
+        shape1: "enemy1",
         shape2: "block",
         detector: function (block, player) {
             if ( 
@@ -68,8 +68,8 @@ CLOCKWORKRT.collisions.register([
         }
     },
      {
-        shape1: "enemy1",
-        shape2: "block",
+        shape1: "block",
+        shape2: "enemy1",
         detector: function (block, player) {
             if ( 
                 ((player.x >= block.x && player.x <= block.x + block.w) || (player.x + player.w >= block.x && player.x + player.w <= block.x + block.w)) &&
@@ -109,6 +109,20 @@ CLOCKWORKRT.collisions.register([
             }
         }
     },
+    {
+        shape1: "player",
+        shape2: "enemy1",
+        detector: function (block, player) {
+            if ( 
+                ((player.x >= block.x && player.x <= block.x + block.w) || (player.x + player.w >= block.x && player.x + player.w <= block.x + block.w)) &&
+                ((player.y >= block.y && player.y <= block.y + block.h) || (player.y + player.h >= block.y && player.y + player.h <= block.y + block.h))
+            ) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    },
      {
         shape1: "player",
         shape2: "meta",
@@ -127,6 +141,9 @@ CLOCKWORKRT.collisions.register([
         shape1: "player",
         shape2: "lava",
         detector: function (block, player) {
+            var aux= block;
+            block=player;
+            player=aux;
             if ( 
                 ((player.x >= block.x && player.x <= block.x + block.w) || (player.x + player.w >= block.x && player.x + player.w <= block.x + block.w)) &&
                 ((player.y >= block.y && player.y <= block.y + block.h) || (player.y + player.h >= block.y && player.y + player.h <= block.y + block.h))

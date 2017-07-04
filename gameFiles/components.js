@@ -274,7 +274,7 @@ CLOCKWORKRT.components.register([
             },
             {
                 name: "#collide", code: function (event) {
-                    if(event.shape2kind == "enemy1"){
+                    if(event.shape2kind == "enemy1" || event.shape2kind == "bullet"){
                         this.engine.debug.log("colision con enemy1: " + this.engine.var['#currentLevel']);
                         this.engine.loadLevelByIndex(this.engine.var['#currentLevel']);
                     }
@@ -326,7 +326,7 @@ CLOCKWORKRT.components.register([
         inherits: "block",
         collision: {
             "lava": [
-                { "x": 0, "y": 0, "w": 0 , "h": 0, "#tag": "collenemy"},
+                { "x": 0, "y": 0, "w": 50 , "h": 50, "#tag": "collenemy"},
             ]
         },
            events: [
@@ -408,6 +408,11 @@ CLOCKWORKRT.components.register([
         inherits: "enemyshooter",
         sprite: "enemydisp"
     },
+     {
+        name: "platanin",
+        inherits: "enemyshooter",
+        sprite: "platanin"
+    },
     {
         name: "disparo",
         events: [
@@ -474,12 +479,21 @@ CLOCKWORKRT.components.register([
         sprite: "enemy2"
     },
     {
+        name: "elenemigo",
+        inherits: "enemy",
+        sprite: "elenemigo"
+    },
+    {
         name: "textura1",
         sprite: "textura1"
     },
      {
         name: "pinchos",
         sprite: "pinchos"
+    },
+     {
+        name: "pinchosh",
+        sprite: "pinchosh"
     }, {
         name: "metatest",
         sprite: "metatest"
