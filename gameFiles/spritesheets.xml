@@ -39,8 +39,8 @@
     </frames>
   </spritesheet>
 
-  <spritesheet name="background1" src="images/fondo1.png">
-    <!--PLAYER STATES-->
+  <spritesheet name="background1" src="images/fondo1.jpg">
+  <!--PLAYER STATES-->
     <states>
       <state name="Idle">
         <layer name="Idle"></layer>
@@ -53,11 +53,12 @@
       </layer>
     </layers>
     <!--PLAYER FRAMES-->
+    <!--Cambiar cuando tengamos los fondos correctamnte dimensionados-->
     <frames>
-      <frame name="Idle" x="0" y="0" w="100" h="100" t="100"></frame>
+      <frame name="Idle" x="0" y="0" w="1242" h="2208" t="100"></frame>
     </frames>
   </spritesheet>
-  
+
 </spritesheets>
 
 <!--
