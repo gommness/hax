@@ -26,6 +26,8 @@ CLOCKWORKRT.components.register([
             },
             {
                 name: "#loop", code: function (event){
+                    arrayCollisions = this.engine.collisionQuery("player", {"x": this.var.x, "y": this.var.y, "w": this.var.w, "h": this.var.h});
+
                     if(this.var.keyboardRight && !this.var.keyboardLeft)//nos movemos a la derecha
                         this.var.hSpeed = this.var.moveSpeed;
                     else if(!this.var.keyboardRight && this.var.keyboardLeft)//nos movemos a la izquierda
@@ -118,8 +120,48 @@ CLOCKWORKRT.components.register([
                             break;
                     }
                 }
+            },
+            {
+                name: "#collide", code: function (event) {
+                    
+                    this.var.$x -= this.var.hSpeed;
+                    this.var.$y -= this.var.vSpeed;
+                    this.var.keyboardLeft = false;
+                    this.var.keyboardRight = false;
+
+                }
             }
-        ]
+        ],
+
+        collision: {
+            "player": [
+                { "x": 0, "y": 0, "w": 100, "h": 100, "#tag": "playerCollision" },
+            ]
+        }
+    },
+
+
+    {
+        name: "block",
+        sprite: "block",
+        events: [
+            {
+                name: "#setup", code: function(event){
+                    this.var.moveSpeed = 0; //velocidad a la que se moverá el jugador lateralmente
+                    this.var.jumpSpeed = 0; //velocidad con la que saltará el jugador
+                    this.var.vSpeed = 0; //velocidad vertical
+                    this.var.hSpeed = 0; //velocidad horizontal
+                    this.var.gravity = 0; //velocidad de la gravedad que afecta al jugador
+                    this.var.jumpEnable = false;
+                }
+            },
+        ],
+
+        collision: {
+            "block": [
+                { "x": 0, "y": 0, "w": 100, "h": 100, "#tag": "playerCollision" },
+            ]
+        }
     },
 ])
 
