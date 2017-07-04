@@ -194,6 +194,262 @@
     </frames>
   </spritesheet>
 
+   <spritesheet name="textura1_1" src="images/tileset1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="0" y="0" w="50" h="50" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+     <spritesheet name="textura1_2" src="images/tileset1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="50" y="0" w="50" h="50" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+       <spritesheet name="textura1_3" src="images/tileset1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="100" y="0" w="50" h="50" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+       <spritesheet name="textura1_4" src="images/tileset1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="150" y="0" w="50" h="50" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+     <spritesheet name="textura1_5" src="images/tileset1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="0" y="50" w="50" h="50" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+     <spritesheet name="textura1_6" src="images/tileset1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="50" y="50" w="50" h="50" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+       <spritesheet name="textura1_7" src="images/tileset1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="100" y="50" w="50" h="50" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+       <spritesheet name="textura1_8" src="images/tileset1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="150" y="50" w="50" h="50" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+     <spritesheet name="textura1_9" src="images/tileset1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="0" y="100" w="50" h="50" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+     <spritesheet name="textura1_10" src="images/tileset1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="50" y="100" w="50" h="50" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+       <spritesheet name="textura1_11" src="images/tileset1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="100" y="100" w="50" h="50" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+       <spritesheet name="textura1_12" src="images/tileset1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="150" y="100" w="50" h="50" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+     <spritesheet name="textura1_13" src="images/tileset1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="0" y="150" w="50" h="50" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+     <spritesheet name="textura1_14" src="images/tileset1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="50" y="150" w="50" h="50" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+       <spritesheet name="textura1_15" src="images/tileset1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="100" y="150" w="50" h="50" t="100"></frame>
+    </frames>
+  </spritesheet>
+
+       <spritesheet name="textura1_16" src="images/tileset1.png">
+    <states>
+      <state name="E1">
+        <layer name="E1"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="E1" x="0" y="0">
+        <frame name="E1"></frame>
+      </layer>
+    </layers>
+    <frames>
+      <frame name="E1" x="150" y="150" w="50" h="50" t="100"></frame>
+    </frames>
+  </spritesheet>
+
   <spritesheet name="pinchos" src="images/pinchos.png">
     <states>
       <state name="E1">
@@ -210,7 +466,7 @@
     </frames>
   </spritesheet>
 
-  <spritesheet name="metatest" src="images/metatest.png">
+  <spritesheet name="meta" src="images/objetos50x50.png">
     <states>
       <state name="E1">
         <layer name="E1"></layer>

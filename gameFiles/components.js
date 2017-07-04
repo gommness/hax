@@ -477,12 +477,76 @@ CLOCKWORKRT.components.register([
         name: "textura1",
         sprite: "textura1"
     },
+        {
+        name: "textura1_1",
+        sprite: "textura1_1"
+    },
+        {
+        name: "textura1_2",
+        sprite: "textura1_2"
+    },
+        {
+        name: "textura1_3",
+        sprite: "textura1_3"
+    },
+        {
+        name: "textura1_4",
+        sprite: "textura1_4"
+    },
+        {
+        name: "textura1_5",
+        sprite: "textura1_5"
+    },
+        {
+        name: "textura1_6",
+        sprite: "textura1_6"
+    },
+        {
+        name: "textura1_7",
+        sprite: "textura1_7"
+    },
+        {
+        name: "textura1_8",
+        sprite: "textura1_8"
+    },
+        {
+        name: "textura1_9",
+        sprite: "textura1_9"
+    },
+        {
+        name: "textura1_10",
+        sprite: "textura1_10"
+    },
+        {
+        name: "textura1_11",
+        sprite: "textura1_11"
+    },
+        {
+        name: "textura1_12",
+        sprite: "textura1_12"
+    },
+        {
+        name: "textura1_13",
+        sprite: "textura1_13"
+    },
+        {
+        name: "textura1_14",
+        sprite: "textura1_14"
+    },
+        {
+        name: "textura1_15",
+        sprite: "textura1_15"
+    },
+        {
+        name: "textura1_16",
+        sprite: "textura1_16"
+    },
      {
         name: "pinchos",
         sprite: "pinchos"
     }, {
-        name: "metatest",
-        sprite: "metatest"
+        name: "metasprite",
+        sprite: "meta"
     },
    {
         name: "explosion",
